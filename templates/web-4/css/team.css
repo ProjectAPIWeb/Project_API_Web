@@ -1,0 +1,290 @@
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+	transform-style: preserve-3d;
+}
+	/*  UPDATED! flip the pane when hovered */
+	.flip-container:hover .back {
+		transform: rotateY(0deg);
+		-webkit-transform: rotateY(0deg);
+		-ms-transform: rotateY(0deg);
+		-o-transform: rotateY(0deg);
+		-moz-transform: rotateY(0deg);
+	}
+	.flip-container:hover .front {
+	    transform: rotateY(180deg);
+		-webkit-transform: rotateY(180deg);
+		-ms-transform: rotateY(180deg);
+		-o-transform: rotateY(180deg);
+		-moz-transform: rotateY(180deg);
+	}
+
+.flip-container, .back {
+	width: 100%;
+    height: 383px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/*  UPDATED! front pane, placed above back */
+.front {
+	z-index: 2;
+	background:#000;
+	transform: rotateY(0deg);
+	-webkit-transform: rotateY(0deg);
+	-ms-transform: rotateY(0deg);
+	-o-transform: rotateY(0deg);
+	-ms-transform: rotateY(0deg);
+}
+.front img{
+	width:100%;
+}
+/* back, initially hidden pane */
+.back {
+    transform: rotateY(-180deg);
+	-webkit-transform: rotateY(-180deg);
+	-ms-transform: rotateY(-180deg);
+	-o-transform: rotateY(-180deg);
+	-moz-transform: rotateY(-180deg);
+    background: #F44336;
+    padding: 8em 2em 0;
+    text-align: center;
+}
+
+/* 
+	Some vertical flip updates 
+*/
+.vertical.flip-container {
+	position: relative;
+}
+
+.vertical .back {
+	transform: rotateX(180deg);
+	-webkit-transform: rotateX(180deg);
+	-ms-transform: rotateX(180deg);
+	-o-transform: rotateX(180deg);
+	-moz-transform: rotateX(180deg);
+}
+
+.vertical.flip-container:hover .back {
+    transform: rotateX(0deg);
+	-webkit-transform: rotateX(0deg);
+	-ms-transform: rotateX(0deg);
+	-o-transform: rotateX(0deg);
+	-moz-transform: rotateX(0deg);
+}
+
+.vertical.flip-container:hover .front {
+    transform: rotateX(180deg);
+	-webkit-transform: rotateX(180deg);
+	-ms-transform: rotateX(180deg);
+	-o-transform: rotateX(180deg);
+	-moz-transform: rotateX(180deg);
+}
+.back h4{
+	color: #fff;
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin: 0;
+}
+.back p{
+	font-size: .9em;
+    margin-top: 1em;
+    color: #fff;
+}
+.w3l-social {
+    margin: 1em 0 0 0;
+}
+.w3l-social ul{
+	padding:0;
+	margin:0;
+}
+.w3l-social ul li{
+	display:inline-block;
+}
+.w3l-social ul li a {
+	color: #333;
+    text-align: center;
+}
+.w3l-social ul li a i.fa.fa-facebook{
+	height: 40px;
+    width: 40px;
+    background: #FFFFFF;
+    line-height: 40px;
+    color: #383838;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+.w3l-social ul li a i.fa.fa-facebook:hover {
+	background: #3b5998;
+	color: #FFFFFF;
+}
+.w3l-social ul li a i.fa.fa-twitter{
+	height: 40px;
+    width: 40px;
+    background: #FFFFFF;
+    line-height: 40px;
+    color: #383838;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+.w3l-social ul li a i.fa.fa-twitter:hover{
+	background: #1da1f2;
+	color: #FFFFFF;
+}
+.w3l-social ul li a i.fa.fa-rss{
+	height: 40px;
+    width: 40px;
+    background: #FFFFFF;
+    line-height: 40px;
+    color: #383838;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;	
+}
+.w3l-social ul li a i.fa.fa-rss:hover{
+	background: #f26522;
+	color: #FFFFFF;
+}
+@media(max-width:1080px){
+	.back {
+		padding: 6em 1em 0;
+	}
+	.flip-container, .back {
+		height: 308px;
+	}
+}
+@media(max-width:991px){
+	.team-grid {
+		float: left;
+		width: 50%;
+	}
+	.team-grid:nth-child(3),.team-grid:nth-child(4){
+		margin:2em 0 0 0;
+	}
+	.back {
+		padding: 12em 1em 0;
+	}
+	.flip-container, .back {
+		height: 496px;
+	}
+}
+@media(max-width:667px){
+	.flip-container, .back {
+		height: 422px;
+	}
+	.back {
+		padding: 10em 1em 0;
+	}
+}
+@media(max-width:640px){
+	.flip-container, .back {
+		height: 400px;
+	}
+}
+@media(max-width:600px){
+	.flip-container, .back {
+		height: 371px;
+	}
+}
+@media(max-width:568px){
+	.flip-container, .back {
+		height: 346px;
+	}
+	.back {
+		padding: 8.5em 1em 0;
+	}
+}
+@media(max-width:480px){	
+	.agile-team-grids{
+		margin: 2em 0 0 0;
+	}
+	.back h4 {
+		letter-spacing: 2px;
+	}
+	.back {
+		padding: 6em 1em 0;
+	}
+	.flip-container, .back {
+		height: 280px;
+	}
+}
+@media(max-width:414px){
+	.team-grid {
+		float: none;
+		width: 100%;
+	}
+	.team-grid:nth-child(2),.team-grid:nth-child(3), .team-grid:nth-child(4) {
+		margin: 1em 0 0 0;
+	}
+	.back {
+		padding: 12em 0em 0;
+	}
+	.flip-container, .back {
+		height: 506px;
+	}
+	.team-grid:nth-child(2), .team-grid:nth-child(3), .team-grid:nth-child(4) {
+		margin: 1em 0 0 0;
+	}
+}
+@media(max-width:384px){
+	.flip-container, .back {
+		height: 462px;
+	}
+}
+@media(max-width:375px){
+	.flip-container, .back {
+		height: 449px;
+	}
+}
+@media(max-width:320px){
+	.flip-container, .back {
+		height: 366px;
+	}
+	.back {
+		padding: 9em 0em 0;
+	}
+}
