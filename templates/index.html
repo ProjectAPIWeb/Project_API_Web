@@ -1,556 +1,422 @@
-<html>
-<head>
-<title>Curabitur a Food and restaurant Category Flat Bootstarp Responsive Website Template | Home :: w3layouts</title>
-<link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet" type="text/css" media="all">
-<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" media="all" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Curabitur Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link rel="stylesheet" href="{{ url_for('static', filename='flexslider.css') }}" type="text/css" media="screen" />
-<script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js')}}"></script>
- <!---- start-smoth-scrolling---->
- <script type="text/javascript" src="{{ url_for('static', filename='js/move-top.js')}}"></script>
- <script type="text/javascript" src="{{ url_for('static', filename='js/easing.js')}}"></script>
- <script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
-				event.preventDefault();
-				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
-			});
-		});
-	</script>
-
-<!-- cart -->
-		<script src="{{ url_for('static', filename='js/simpleCart.min.js')}}"> </script>
-	<!-- cart -->
-  <script src="{{ url_for('static', filename='js/bootstrap.js')}}"> </script>
-  
-</head>
-<body>
-		<!-- start-header section-->
-			<div class="header">
-				<div class="container">
-				     <div class="top-header">
-						<div class="phone">
-							<ul>
-								<li><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span></li>
-								<li><p>+4758 655 5947</p></li>
-							</ul>
-						</div>
-						<div class="logo">
-							<h1><a href="{{ url_for('index')}}">curabitur</a></h1>
-						</div>
-						<div class="header-right">
-						<div class="login">
-						<a href="{{ url_for('login')}}">login</a>
-						</div>
-						<div class="cart box_1">
-							<a href="{{ url_for('checkout')}}">
-								<h3> <span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span> items)<img src="{{ url_for('static', filename='images/bag.png')}}" alt=""></h3>
-							</a>	
-							<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
-							<div class="clearfix"> </div>
-						</div>
-				</div>
-		
-						<div class="clearfix"></div>
-					</div>	
-				</div>
-			</div>
-		<!-- end-header section-->
-		<!--start-banner-->
-			<div class="banner">
-				<div class="container">
-					<div class="top-menu">
-					<span class="menu"><img src="{{ url_for('static', filename='images/nav.png')}}" alt=""/> </span>
-						<ul>
-							<li><a  href="{{ url_for('index')}}" class="active">home</a></li>
-							<li><a  href="{{ url_for('about')}}">about</a></li>
-							<li><a  href="{{ url_for('menu' )}}">menus</a></li>
-							<li><a  href="{{ url_for('gallery')}}">gallery</a></li>
-							<li><a  href="{{ url_for('events')}}">events</a></li>
-							<li><a  href="{{ url_for('contact')}}">contact</a></li>
-						</ul>
-						<!-- script for menu -->
-									
-							 <script>
-							 $("span.menu").click(function(){
-							 $(".top-menu ul").slideToggle("slow" , function(){
-							 });
-							 });
-							 </script>
-						<!-- //script for menu -->
-
-					</div>
-					<section class="slider">
-						<div class="flexslider">
-							<ul class="slides">
-								<li>
-									<div class="slider-info">
-										<h2>Welcome</h2>
-										<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-									</div>
-								</li>
-								<li>
-									<div class="slider-info">
-									<h2>Welcome</h2>
-										<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-									</div>
-								</li>
-								<li>	
-									<div class="slider-info">
-									<h2>Welcome</h2>
-										<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</section>
-						<!-- FlexSlider -->
-							  <script defer src="{{ url_for('static', filename='js/jquery.flexslider.js')}}"></script>
-							  <script type="text/javascript">
-									$(function(){
-									  SyntaxHighlighter.all();
-									});
-									$(window).load(function(){
-									  $('.flexslider').flexslider({
-										animation: "slide",
-										start: function(slider){
-										  $('body').removeClass('loading');
-										}
-									  });
-									});
-							  </script>
-						<!-- FlexSlider -->
-				</div>	
-			</div>
-		<!--end-banner-->
-			<div class="banner-bottom">
-				<div class="container">
-				<div class="droop-down">
-					<div class="col-md-3 droop">
-							<div class="sort-by">
-		            <label>Citys </label>
-		            <select class="sel">
-		                            <option value="">
-		                   Columbia              </option>
-		                            <option value="">
-		                 Gobaret              </option>
-		                            <option value="">
-		                   Florissant               </option>
-										<option value="">
-		                   Fergeeson               </option>
-						   
-		            </select>
-		        </div>
-					</div>
-					<div class="col-md-3 droop">
-							<div class="sort-by">
-		            <label>Name</label>
-		            <select>
-		                            <option value="">
-		                  Cocoon Hotel              </option>
-		                            <option value="">
-		                   Chinese Room               </option>
-		                            <option value="">
-		                   Royal Orchid Central              </option>
-						         <option value="">
-		                   Royal Orchid Central              </option>
-						         <option value="">
-		                   Royal Orchid Central              </option>
-		            </select>
-		        </div>
-					</div>
-					<div class="col-md-3 droop">
-							<div class="sort-by">
-		            <label>Order</label>
-		            <select>
-		                            <option value="">
-		                    Arugula              </option>
-		                            <option value="">
-		                  Baking Soda              </option>
-		                            <option value="">
-		                    Cilantro              </option>
-							  <option value="">
-		                Chicken              </option>
-							  <option value="">
-		                    Squash             </option>
-		            </select>
-		        </div>
-					</div>
-					<div class="col-md-3 search">
-					<form>
-					<input type="submit" value="search">
-					</form>				
-					</div>
-					<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-			<div class="content">
-				<!--hot-offer-->
-					<div class="today-offer">
-						<div class="today-head">
-						<h3> today hot offer</h3>
-							<p>Autem vel eum iriure dolor in hendrerit in volestie consequat vel illum</p>
-					</div>
-					<div class="today-grids">
-						<div class="col-md-3 today-grid test1">
-						<img src="{{ url_for('static', filename='images/p1.jpg')}}" class="img-responsive" alt="/">
-							<div class="textbox">
-								<h4>FOOD QUALITY </h4>
-								<p>Arenean nonummy hendrerit mau phaselntes nascetur ridic ulusm dui fusce feu. Cras vitae neque turpis…</p>
-							</div>
-						</div>
-						<div class="col-md-3 today-grid test1">
-						<img src="{{ url_for('static', filename='images/p2.jpg')}}" class="img-responsive" alt="/">
-						<div class="textbox">
-								<h4>FOOD QUALITY </h4>
-								<p>Arenean nonummy hendrerit mau phaselntes nascetur ridic ulusm dui fusce feu. Cras vitae neque turpis…</p>
-							</div>
-						</div>
-						<div class="col-md-3 today-grid test1">
-						<img src="{{ url_for('static', filename='images/p3.jpg')}}" class="img-responsive" alt="/">
-						<div class="textbox">
-								<h4>FOOD QUALITY </h4>
-								<p>Arenean nonummy hendrerit mau phaselntes nascetur ridic ulusm dui fusce feu. Cras vitae neque turpis…</p>
-							</div>
-						</div>
-						<div class="col-md-3 today-grid test1">
-						<img src="{{ url_for('static', filename='images/p4.jpg')}}" class="img-responsive" alt="/">
-						<div class="textbox">
-								<h4>FOOD QUALITY </h4>
-								<p>Arenean nonummy hendrerit mau phaselntes nascetur ridic ulusm dui fusce feu. Cras vitae neque turpis…</p>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<!--end-hot-offer-->
-				<!--menu-->
-					<div class="menu-offer">
-						<div class="container">
-						<div class="menu-head">
-						<h3>our menu</h3>
-							<p>Autem vel eum iriure dolor in hendrerit in volestie consequat vel illum</p>
-					</div>
-					<div class="menu-grids">
-						<div class="col-md-4 menu-grid">
-							<div class="menu-text">
-									<div class="menu-text-left">
-										<h5>Cheese, tomato</h5>
-									</div>
-									<div class="menu-text-midle">
-										<span class="line"> </span>
-									</div>
-									<div class="menu-text-right">
-										<h5>$ 50</h5>
-									</div>
-									<div class="clearfix"> </div>
-								</div>	
-								<div class="menu-text">
-									<div class="menu-text-left">
-										<h5>Chicken, mozzarella</h5>
-									</div>
-									<div class="menu-text-midle">
-										<span class="line"> </span>
-									</div>
-									<div class="menu-text-right">
-										<h5>$62</h5>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text">
-									<div class="menu-text-left">
-										<h5>Tuna, Sweetcorn</h5>
-									</div>
-									<div class="menu-text-midle">
-										<span class="line"> </span>
-									</div>
-									<div class="menu-text-right">
-										<h5>$25</h5>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text">
-									<div class="menu-text-left">
-										<h5>Minced, Beef</h5>
-									</div>
-									<div class="menu-text-midle">
-										<span class="line"> </span>
-									</div>
-									<div class="menu-text-right">
-										<h5>$30</h5>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-						</div>
-						<div class="col-md-4 menu-grid">
-							<div class="menu-text">
-									<div class="menu-text-left">
-										<h5>tomato, mushr</h5>
-									</div>
-									<div class="menu-text-midle">
-										<span class="line"> </span>
-									</div>
-									<div class="menu-text-right">
-										<h5>$ 50</h5>
-									</div>
-									<div class="clearfix"> </div>
-								</div>	
-								<div class="menu-text">
-									<div class="menu-text-left">
-										<h5>Chicken, onions</h5>
-									</div>
-									<div class="menu-text-midle">
-										<span class="line"> </span>
-									</div>
-									<div class="menu-text-right">
-										<h5>$62</h5>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text">
-									<div class="menu-text-left">
-										<h5>Tuna, Sweetcorn</h5>
-									</div>
-									<div class="menu-text-midle">
-										<span class="line"> </span>
-									</div>
-									<div class="menu-text-right">
-										<h5>$25</h5>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text">
-									<div class="menu-text-left">
-										<h5>Pineapple, Beef</h5>
-									</div>
-									<div class="menu-text-midle">
-										<span class="line"> </span>
-									</div>
-									<div class="menu-text-right">
-										<h5>$30</h5>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-						
-						</div>
-						<div class="col-md-4 menu-grid cooke">
-						<img src="{{ url_for('static', filename='images/p5.jpg')}}" class="img-responsive" alt="/">
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-				<!--end-menu-->
-				<div class="order-grids">
-				<div class="container">
-				<div class="order-head">
-						<h3>What makes us Different</h3>
-							<p>Autem vel eum iriure dolor in hendrerit in volestie consequat vel illum</p>
-					</div>
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingOne">
-							<h4 class="panel-title">
-								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									DESSERTS
-								</a>
-							</h4>
-						</div>
-						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-							<div class="panel-body">
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/d1.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/d2.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/d3.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/d4.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="clerafix"></div>
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingTwo">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-								CHICKEN
-								</a>
-							</h4>
-						</div>
-						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-							<div class="panel-body">
-							<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/p6.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/p7.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/p8.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/p9.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="clerafix"></div>
-							</div>
-						</div>
-						</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingThree">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-							DESSERTS
-								</a>
-							</h4>
-						</div>
-						<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-							<div class="panel-body">
-							<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/d1.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/d2.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/d3.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/d4.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="clerafix"></div>
-							</div>
-						</div>
-					</div>
-										<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingFour">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFoure">
-							SEAFOOD
-								</a>
-							</h4>
-						</div>
-						<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-							<div class="panel-body">
-							<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/s1.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/s2.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/s3.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/s4.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="clerafix"></div>
-							</div>
-						</div>
-					</div>
-										<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingFive">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-								SALADS
-								</a>
-							</h4>
-						</div>
-						<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-							<div class="panel-body">
-							<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/s5.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/s6.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/s7.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-3 order-grid">
-								<img src="{{ url_for('static', filename='images/s8.jpg')}}" class="img-responsive" alt="/">
-								</div>
-								<div class="clerafix"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			</div>
-		<div class="specials-section">
-			<div class="container">
-				<div class="col-md-3 specials">
-				<h3>about</h3>
-				<p>Morbi pretium gravida justo nec ultrices. Ut et facilisis justo. Fusce ac turpis eros, vel molestie lectus.feugiat velit velit non turpis</p>
-				</div>
-				<div class="col-md-3 specials1">
-				<h3>specials</h3>
-				<ul>
-					<li><a href="#">New Listing Sign-Up</a></li>
-					<li><a href="#">Consectetur adipiscing</a></li>
-					<li><a href="#">Integer molestie lorem</a></li>
-					<li><a href="#">Facilisis in pretium nisl</a></li>
-				</ul>
-				</div>
-			<div class="col-md-3 specials1">
-			<h3>recipes</h3>
-			<ul>
-				<li><a href="#">Integer molestie lorem</a></li>
-				<li><a href="#">Integer molestie lorem</a></li>
-				<li><a href="#">Consectetur adipiscing</a></li>
-				<li><a href="#">Lorem ipsum dolor sit</a></li>
-			</ul>
-			</div>
-			<div class="col-md-3 specials1">
-			<h3>social</h3>
-			<ul>
-				<li><a href="#">facebook</a></li>
-				<li><a href="#">twitter</a></li>
-				<li><a href="#">google</a></li>
-				<li><a href="#">viemo</a></li>
-			</ul>
-			</div>
-			<div class="clearfix"></div>
-			</div>
-			</div>
-	</div>
-	<div class="footer-section">
-					<div class="container">
-						<div class="footer-top">
-						<p>&copy; 2015 <span>Curabitur.</span> All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-					</div>
-					<script type="text/javascript">
-						$(document).ready(function() {
-							/*
-							var defaults = {
-					  			containerID: 'toTop', // fading element id
-								containerHoverID: 'toTopHover', // fading element hover id
-								scrollSpeed: 1200,
-								easingType: 'linear' 
-					 		};
-							*/
-							
-							$().UItoTop({ easingType: 'easeOutQuart' });
-							
-						});
-					</script>
-				<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-
-
-					</div>
-					</div>
-
-
-	
-</body>
+<!--A Design by W3layouts
+  Author: W3layout
+  Author URL: http://w3layouts.com
+  License: Creative Commons Attribution 3.0 Unported
+  License URL: http://creativecommons.org/licenses/by/3.0/
+  -->
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <title>Test</title>
+    <!--meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Sapid Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+      Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+      addEventListener("load", function () {
+      	setTimeout(hideURLbar, 0);
+      }, false);
+      
+      function hideURLbar() {
+      	window.scrollTo(0, 1);
+      }
+    </script>
+    <!--//meta tags ends here-->
+    <!--booststrap-->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all">
+    <!--//booststrap end-->
+    <!-- font-awesome icons -->
+    <link href="{{ url_for('static', filename='css/font-awesome.min1.css')}}" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!--stylesheets-->
+    <link href="{{ url_for('static', filename='css/style1.css')}}" rel='stylesheet' type='text/css' media="all">
+    <!--//stylesheets-->
+    <link href="{{ url_for('static', filename='//fonts.googleapis.com/css?family=Oswald:400,500,600,700')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='//fonts.googleapis.com/css?family=Open+Sans:400,600,700')}}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="main-top" id="home">
+      <!-- header -->
+      <div class="headder-top">
+        <!-- nav -->
+        <nav >
+          <div id="logo">
+            <h1><a href="{{ url_for('index')}}">Project 01</a></h1>
+          </div>
+          <label for="drop" class="toggle">Menu</label>
+          <input type="checkbox" id="drop">
+          <ul class="menu mt-2">
+            <li class="active"><a href="{{ url_for('index')}}">Home</a></li>
+            <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('about')}}">About</a></li>
+            <li><a href="{{ url_for('service')}}">Services</a></li>
+            <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+              <!-- First Tier Drop Down -->
+              <label for="drop-2" class="toggle toogle-2">Dropdown <span class="fa fa-angle-down" aria-hidden="true"></span>
+              </label>
+              <a href="#">Dropdown <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+              <input type="checkbox" id="drop-2">
+              <ul>
+                <li><a href="{{ url_for('gallery')}}" class="drop-text">Gallery</a></li>
+                <li><a href="{{ url_for('menu')}}" class="drop-text">Menu</a></li>
+                <li><a href="{{ url_for('recipe')}}" class="drop-text">Recipes</a></li>
+                <li><a href="{{ url_for('login')}}" class="drop-text">Login</a></li>
+                <li><a href="{{ url_for('register')}}" class="drop-text">Register</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
+          </ul>
+        </nav>
+        <!-- //nav -->
+      </div>
+      <!-- //header -->
+      <!-- banner -->
+      <div class="main-banner">
+        <div class="container-fluid">
+          <div class="style-banner ">
+            <h4>Header</h4>
+            <h4>Header</h4>
+            <div class="two-demo-button mt-md-4 mt-3">
+              <p> Text</p>
+            </div>
+            <div class="social-icons mt-lg-4 mt-3">
+              <ul>
+                <li><a href="#"><span class="fa fa-facebook mr-lg-3 mr-2"></span></a></li>
+                <li><a href="#"><span class="fa fa-twitter mr-lg-3 mr-2"></span></a></li>
+                <li><a href="#"><span class="fa fa-rss mr-lg-3 mr-2"></span></a></li>
+                <li><a href="#"><span class="fa fa-envelope mr-lg-3 mr-2"></span></a></li>
+                <li><a href="#"><span class="fa fa-instagram mr-lg-3 mr-2"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- //banner -->
+    <!-- about -->
+    <section class="about py-lg-4 py-md-3 py-sm-3 py-3" id="about">
+      <div class="container pt-lg-5 pt-md-4 pt-sm-4 pt-3">
+        <h6 class="text-center top-title mb-2">Header</h6>
+        <h3 class="text-center title mb-3">Header</h3>
+        <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
+          <p>Text</p>
+        </div>
+      </div>
+      <div class="container-fluid pb-lg-5 pb-md-4 pb-sm-4 pb-3">
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-6 about-fashion-one">
+            <img src="{{ url_for('static', filename='images/ab1.jpg')}}" alt="news image" class="img-fluid">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 about-fashion-one mt-lg-5 mt-md-4 mt-sm-0">
+            <img src="{{ url_for('static', filename='images/ab2.jpg')}}" alt="news image" class="img-fluid">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 about-fashion-one pt-lg-4 mt-lg-5 mt-md-4 mt-sm-3">
+            <img src="{{ url_for('static', filename='images/ab3.jpg')}}" alt="news image" class="img-fluid">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 about-fashion-one">
+            <img src="{{ url_for('static', filename='images/ab4.jpg')}}" alt="news image" class="img-fluid">
+          </div>
+        </div>
+        <div class="pt-lg-5 pt-md-4 pt-3 text-center about-two-grids">
+          <div class="about-para-txt">
+            <p>Text</p>
+            <p class="mt-2">Text</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--//about -->
+    <!--menu-order-->
+    <section class="menu-order py-lg-4 py-md-3 py-sm-3 py-3" id="menu-order">
+      <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h6 class="text-center top-title mb-2">Header</h6>
+        <h3 class="text-center title mb-3">Our Menu</h3>
+        <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
+          <p>Text</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <div class="wls-hours-list">
+              <ul>
+                <li class="d-flex">Rigatoni Pasta<span class="time ml-auto"> $30</span></li>
+                <li class="d-flex">Soup Pasta<span class="time ml-auto">$12</span></li>
+                <li class="d-flex">Ribbon Pasta<span class="time ml-auto">$6</span></li>
+                <li class="d-flex">Tubular Pasta<span class="time ml-auto">$22</span></li>
+                <li class="d-flex">Penne Pasta<span class="time ml-auto">$15</span></li>
+                <li class="d-flex">Shaped Pasta   <span class="time ml-auto">$18</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="wls-hours-list">
+              <ul>
+                <li class="d-flex">Rigatoni Pasta<span class="time ml-auto"> $30</span></li>
+                <li class="d-flex">Soup Pasta<span class="time ml-auto">$12</span></li>
+                <li class="d-flex">Ribbon Pasta<span class="time ml-auto">$6</span></li>
+                <li class="d-flex">Tubular Pasta<span class="time ml-auto">$22</span></li>
+                <li class="d-flex">Penne Pasta<span class="time ml-auto">$15</span></li>
+                <li class="d-flex">Shaped Pasta   <span class="time ml-auto">$18</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="wls-hours-list">
+              <ul>
+                <li class="d-flex">Rigatoni Pasta<span class="time ml-auto"> $30</span></li>
+                <li class="d-flex">Soup Pasta<span class="time ml-auto">$12</span></li>
+                <li class="d-flex">Ribbon Pasta<span class="time ml-auto">$6</span></li>
+                <li class="d-flex">Tubular Pasta<span class="time ml-auto">$22</span></li>
+                <li class="d-flex">Penne Pasta<span class="time ml-auto">$15</span></li>
+                <li class="d-flex">Shaped Pasta   <span class="time ml-auto">$18</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--//menu-order -->
+    <!-- service -->
+    <section class="service py-lg-4 py-md-3 py-sm-3 py-3" id="service">
+      <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h6 class="text-center top-title mb-2">Header</h6>
+        <h3 class="text-center title mb-3">Text</h3>
+        <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
+          <p>text</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6 service-grid-wthree">
+            <div class="ser-fashion-grid">
+              <div class="about-icon mb-md-4 mb-3">
+                <span class="fa fa-laptop" aria-hidden="true"></span>
+              </div>
+              <div class="ser-sevice-grid">
+                <h4 class="pb-3">Online Order </h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 service-grid-wthree ">
+            <div class="ser-fashion-grid">
+              <div class="about-icon mb-md-4 mb-3">
+                <span class="fa fa-home" aria-hidden="true"></span>
+              </div>
+              <div class="ser-sevice-grid">
+                <h4 class="pb-3">Home Delivery</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 service-grid-wthree">
+            <div class="ser-fashion-grid">
+              <div class="about-icon mb-md-4 mb-3">
+                <span class="fa fa-bars" aria-hidden="true"></span>
+              </div>
+              <div class="ser-sevice-grid">
+                <h4 class="pb-3">New menu</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 mt-lg-5 mt-md-4 mt-3 service-grid-wthree ">
+            <div class="ser-fashion-grid">
+              <div class="about-icon mb-md-4 mb-3">
+                <span class="fa fa-bookmark" aria-hidden="true"></span>
+              </div>
+              <div class="ser-sevice-grid">
+                <h4 class="pb-3">Fresh Recipe</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 mt-lg-5 mt-md-4 mt-3 service-grid-wthree">
+            <div class="ser-fashion-grid">
+              <div class="about-icon mb-md-4 mb-3">
+                <span class="fa fa-thumbs-o-up" aria-hidden="true"></span>
+              </div>
+              <div class="ser-sevice-grid">
+                <h4 class="pb-3">Quality</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 mt-lg-5 mt-md-4 mt-3 service-grid-wthree">
+            <div class="ser-fashion-grid">
+              <div class="about-icon mb-md-4 mb-3">
+                <span class="fa fa-money" aria-hidden="true"></span>
+              </div>
+              <div class="ser-sevice-grid">
+                <h4 class="pb-3">Best Price</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--//service -->
+    <!-- prices  -->
+    <section class="price py-lg-4 py-md-3 py-sm-3 py-3" id="price">
+      <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h6 class="text-center top-title mb-2">Header</h6>
+        <h3 class="text-center title mb-3">Our Service</h3>
+        <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
+          <p>Text</p>
+        </div>
+        <div class="row w3pvt-service-grids-all text-center">
+          <div class="col-lg-4 col-md-4 table-tab-table">
+            <div class="table-wthree-price">
+              <div class="table-sub-title text-center">
+                <h4>Gold</h4>
+                <h5 class="pt-lg-4 pt-md-4 pt-3"><span>$</span>50</h5>
+                <h6 class="pt-3">Per Month</h6>
+                <p class="pt-lg-5 pt-md-4 pt-3"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum</p>
+              </div>
+              <div class="view-buttn text-center pt-lg-4 pt-3">
+                <a href="{{ url_for('contact')}}" class="btn ">Book Here</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 table-tab-table">
+            <div class="table-wthree-price">
+              <div class="table-sub-title text-center">
+                <h4>Platium</h4>
+                <h5 class="pt-lg-4 pt-md-4 pt-3"><span>$</span>60</h5>
+                <h6 class="pt-3">Per Month</h6>
+                <p class="pt-lg-5 pt-md-4 pt-3"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum</p>
+              </div>
+              <div class="view-buttn text-center pt-lg-4 pt-3">
+                <a href="{{ url_for('contact')}}" class="btn ">Book Here</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 table-tab-table">
+            <div class="table-wthree-price">
+              <div class="table-sub-title text-center">
+                <h4>Sliver</h4>
+                <h5 class="pt-lg-4 pt-md-4 pt-3"><span>$</span>70</h5>
+                <h6 class="pt-3">Per Month</h6>
+                <p class="pt-lg-5 pt-md-4 pt-3"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum</p>
+              </div>
+              <div class="view-buttn text-center pt-lg-4 pt-3">
+                <a href="{{ url_for('contact')}}" class="btn ">Book Here</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--//prices -->
+    <!-- Clients  -->
+    <section class="clients py-lg-4 py-md-3 py-sm-3 py-3" id="clients">
+      <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h6 class="text-center top-title mb-2">Header</h6>
+        <h3 class="text-center title mb-3">Our Clients</h3>
+        <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum </p>
+        </div>
+        <div class="row pt-lg-5 pt-md-4 pt-3">
+          <div class="col-lg-4 clients-client">
+            <div class="register-left-w3pvt">
+              <div class="client-icon-top">
+                <span class="fa fa-quote-right" aria-hidden="true"></span>
+              </div>
+              <div class="clients-info">
+                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet,
+                </p>
+                <h4 class="pt-2 text-right">Jony Joe</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 clients-client">
+            <div class="register-left-w3pvt">
+              <div class="client-icon-top">
+                <span class="fa fa-quote-right" aria-hidden="true"></span>
+              </div>
+              <div class="clients-info">
+                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet,
+                </p>
+                <h4 class="pt-2 text-right">Max Joe</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 clients-client">
+            <div class="register-left-w3pvt">
+              <div class="client-icon-top">
+                <span class="fa fa-quote-right" aria-hidden="true"></span>
+              </div>
+              <div class="clients-info">
+                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet,
+                </p>
+                <h4 class="pt-2 text-right">Kely Joe</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--//Clients  -->
+    <!-- footer -->
+    <footer class="py-lg-3 py-md-2 py-sm-3 py-2">
+      <div class="container py-lg-4 py-md-4 py-sm-3 py-3">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
+            <h2><a href="{{ url_for('index')}}">Project 01</a></h2>
+            <p class="pt-lg-4 pt-3">Text
+            </p>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
+            <h4>Our Timings</h4>
+            <div class="mt-3 footer-hours-list">
+              <ul>
+                <li class="d-flex">Monday-Friday<span class="time-footer ml-auto"> 9:30-18:30</span></li>
+                <li class="d-flex">Saturday <span class="time-footer ml-auto">10:30-14:30</span></li>
+                <li class="d-flex">Sunday   <span class="time-footer ml-auto">     closed</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
+            <h4>Our Address</h4>
+            <div class="mt-3 footer-top">
+              <p><span>Address</span> :Melbourne St,South <br>Birbane 4101 Austraila.</p>
+              <p class="pt-2"> <span> Phone</span> :+(000) 123 4565 32</p>
+              <p class="pt-2"><span>Email</span>   :<a href="mailto:info@example.com">info@example1.com</a> 
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
+            <h4>Social Icons</h4>
+            <div class="social-icons mt-3">
+              <ul>
+                <li><a href="#"><span class="fa fa-facebook mr-lg-3 mr-2"></span></a></li>
+                <li><a href="#"><span class="fa fa-twitter mr-lg-3 mr-2"></span></a></li>
+                <li><a href="#"><span class="fa fa-rss mr-lg-3 mr-2"></span></a></li>
+                <li><a href="#"><span class="fa fa-envelope mr-lg-3 mr-2"></span></a></li>
+                <li><a href="#"><span class="fa fa-instagram mr-lg-3 mr-2"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--//footer -->
+    <!-- footer-copy-write -->
+    <div class="footer-copy-write py-lg-3 py-md-2 py-sm-3 py-2">
+      <div class="container pb-lg-3 pb-2">
+        <div class="bottem-txt-footer text-center pt-md-4 pt-3">
+          <p> 
+            Test form 01
+          </p>
+        </div>
+        <!-- move icon -->
+        <div class="text-center">
+          <a href="#home" class="move-top text-center mt-3"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+        </div>
+        <!--//move icon -->
+      </div>
+    </div>
+    <!--//footer-copy-write -->
+  </body>
 </html>
-	
