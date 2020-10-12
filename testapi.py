@@ -1,14 +1,18 @@
 import requests
 
-url = "https://edamam-edamam-nutrition-analysis.p.rapidapi.com/api/nutrition-data"
+url = "http://127.0.0.1:5000/product"
+response = requests.request("GET", url)
+result = response.json()
+a = []
+b = []
+c = []
+for i in result :
+    if 0 <= i['id'] <= 24 :
+        a.append(i)
+    if 25 <= i['id'] <= 48 :
+        b.append(i)
+    if 49 <= i['id'] <= 72 :
+        c.append(i)
 
-querystring = {"ingr":"1 large apple"}
-
-headers = {
-    'x-rapidapi-host': "edamam-edamam-nutrition-analysis.p.rapidapi.com",
-    'x-rapidapi-key': "1c4f2121d7msh1922e0add153d9cp1a84eejsnb581979b3390"
-    }
-
-response = requests.request("GET", url, headers=headers, params=querystring)
-
-print(response.text)
+for i in a :
+    print(i['name'])

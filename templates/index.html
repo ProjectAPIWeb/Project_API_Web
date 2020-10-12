@@ -135,42 +135,33 @@
           <p>Text</p>
         </div>
         <div class="row">
+          {% for t in a %}
           <div class="col-lg-4 col-md-4">
             <div class="wls-hours-list">
               <ul>
-                <li class="d-flex">Rigatoni Pasta<span class="time ml-auto"> $30</span></li>
-                <li class="d-flex">Soup Pasta<span class="time ml-auto">$12</span></li>
-                <li class="d-flex">Ribbon Pasta<span class="time ml-auto">$6</span></li>
-                <li class="d-flex">Tubular Pasta<span class="time ml-auto">$22</span></li>
-                <li class="d-flex">Penne Pasta<span class="time ml-auto">$15</span></li>
-                <li class="d-flex">Shaped Pasta   <span class="time ml-auto">$18</span></li>
+                <li class="d-flex">{{ t.name }}<span class="time ml-auto">{{ t.price }}</span></li>
               </ul>
             </div>
           </div>
+          {% endfor %}
+          {% for i in b %}
           <div class="col-lg-4 col-md-4">
             <div class="wls-hours-list">
               <ul>
-                <li class="d-flex">Rigatoni Pasta<span class="time ml-auto"> $30</span></li>
-                <li class="d-flex">Soup Pasta<span class="time ml-auto">$12</span></li>
-                <li class="d-flex">Ribbon Pasta<span class="time ml-auto">$6</span></li>
-                <li class="d-flex">Tubular Pasta<span class="time ml-auto">$22</span></li>
-                <li class="d-flex">Penne Pasta<span class="time ml-auto">$15</span></li>
-                <li class="d-flex">Shaped Pasta   <span class="time ml-auto">$18</span></li>
+                <li class="d-flex">{{ i.name }}<span class="time ml-auto">{{ i.price }}</span></li>
               </ul>
             </div>
           </div>
+          {% endfor %}
+          {% for j in c %}
           <div class="col-lg-4 col-md-4">
             <div class="wls-hours-list">
               <ul>
-                <li class="d-flex">Rigatoni Pasta<span class="time ml-auto"> $30</span></li>
-                <li class="d-flex">Soup Pasta<span class="time ml-auto">$12</span></li>
-                <li class="d-flex">Ribbon Pasta<span class="time ml-auto">$6</span></li>
-                <li class="d-flex">Tubular Pasta<span class="time ml-auto">$22</span></li>
-                <li class="d-flex">Penne Pasta<span class="time ml-auto">$15</span></li>
-                <li class="d-flex">Shaped Pasta   <span class="time ml-auto">$18</span></li>
+                <li class="d-flex">{{ j.name }}<span class="time ml-auto">{{ j.price }}</span></li>
               </ul>
             </div>
           </div>
+          {% endfor %}
         </div>
       </div>
     </section>

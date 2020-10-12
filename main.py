@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
+import requests
 import re
 
 app = Flask(__name__)
@@ -14,7 +15,20 @@ mysql = MySQL(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index() :
-    return render_template('index.html')
+    url = "http://127.0.0.1:5000/product"
+    response = requests.request("GET", url)
+    result = response.json()
+    a = []
+    b = []
+    c = []
+    for i in result :
+        if 1 <= i['id'] <= 6 :
+            a.append(i)
+        if 25 <= i['id'] <= 32 :
+            b.append(i)
+        if 49 <= i['id'] <= 55 :
+            c.append(i)
+    return render_template('index.html', a=a , b=b ,c=c)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register() :
@@ -82,7 +96,22 @@ def gallery() :
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu() :
-    return render_template('menu.html')
+    url = "http://127.0.0.1:5000/product"
+    response = requests.request("GET", url)
+    result = response.json()
+    a = []
+    b = []
+    c = []
+    for i in result :
+        if 1 <= i['id'] <= 24 :
+            a.append(i)
+        if 25 <= i['id'] <= 48 :
+            b.append(i)
+        if 49 <= i['id'] <= 72 :
+            c.append(i)
+
+        
+    return render_template('menu.html', a=a, b=b, c=c)
 
 @app.route('/recipe', methods=['GET', 'POST'])
 def recipe() :
@@ -93,4 +122,4 @@ def service() :
     return render_template('service.html')
 
 if __name__ == '__main__' :
-    app.run(debug=True)
+    app.run(debug=True, host='127.0.0.2')

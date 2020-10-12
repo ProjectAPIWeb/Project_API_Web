@@ -4,18 +4,18 @@ from flask_marshmallow import Marshmallow
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:mac126218@127.0.0.1:5432/Food'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Mac126218@127.0.0.1:5432/Food'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-ma = SQLAlchemy(app)
+ma = Marshmallow(app)
 
 class Product(db.Model) :
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True)
     price = db.Column(db.Float)
 
-    def __init__(self, name, description, price, qty) :
+    def __init__(self, name, price) :
         self.name = name
         self.price = price
     
@@ -45,7 +45,7 @@ def get_product() :
     return jsonify(reuslt)
 
 @app.route('/product/<id>', methods=['GET'])
-def get_product(id) :
+def get_product_id(id) :
     product = Product.query.get(id)
     return product_schema.jsonify(product)
 
