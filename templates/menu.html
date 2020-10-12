@@ -48,7 +48,7 @@
           <input type="checkbox" id="drop">
           <ul class="menu mt-2">
             <li class="active"><a href="{{ url_for('index')}}">Home</a></li>
-            <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('about')}}">About</a></li>
+            <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('menu')}}">Menu</a></li>
             <li><a href="{{ url_for('service')}}">Services</a></li>
             <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
               <!-- First Tier Drop Down -->
@@ -58,7 +58,7 @@
               <input type="checkbox" id="drop-2">
               <ul>
                 <li><a href="{{ url_for('gallery')}}" class="drop-text">Gallery</a></li>
-                <li><a href="{{ url_for('menu')}}" class="drop-text">Menu</a></li>
+                <li><a href="{{ url_for('about')}}" class="drop-text">About</a></li>
                 <li><a href="{{ url_for('recipe')}}" class="drop-text">Recipes</a></li>
                 <li><a href="{{ url_for('login')}}" class="drop-text">Login</a></li>
                 <li><a href="{{ url_for('register')}}" class="drop-text">Register</a></li>
@@ -88,10 +88,10 @@
     <!--menu-order-->
     <section class="menu-order py-lg-4 py-md-3 py-sm-3 py-3" id="menu-order">
       <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
-        <h6 class="text-center top-title mb-2">Header</h6>
-        <h3 class="text-center title mb-3">Header</h3>
+        <h6 class="text-center top-title mb-2">Menu</h6>
+        <h3 class="text-center title mb-3"></h3>
         <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
-          <p>text</p>
+          <p>อาหารคาว</p>
         </div>
         <div class="row">
           {% for r in a %}
