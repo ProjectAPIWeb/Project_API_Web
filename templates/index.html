@@ -22,6 +22,7 @@
       	window.scrollTo(0, 1);
       }
     </script>
+    <script src="/store/inc/clientapi/ac-client-api.js"></script>
     <!--//meta tags ends here-->
     <!--booststrap-->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all">
@@ -47,24 +48,22 @@
           <label for="drop" class="toggle">Menu</label>
           <input type="checkbox" id="drop">
           <ul class="menu mt-2">
+            <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+              <a href="{{ url_for('Cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true" ></i></a>
+            </li>
             <li class="active"><a href="{{ url_for('index')}}">Home</a></li>
             <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('menu')}}">Menu</a></li>
-            <li><a href="{{ url_for('service')}}">Services</a></li>
+            <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
             <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
-              <!-- First Tier Drop Down -->
-              <label for="drop-2" class="toggle toogle-2">Dropdown <span class="fa fa-angle-down" aria-hidden="true"></span>
-              </label>
-              <a href="#">Dropdown <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+              <a href="#"><i class="fa fa-user-o" aria-hidden="true"></i></a>
               <input type="checkbox" id="drop-2">
               <ul>
-                <li><a href="{{ url_for('gallery')}}" class="drop-text">Gallery</a></li>
-                <li><a href="{{ url_for('about')}}" class="drop-text">About</a></li>
-                <li><a href="{{ url_for('recipe')}}" class="drop-text">Recipes</a></li>
+                <li><a href="#" class="drop-text">Account</a></li>
                 <li><a href="{{ url_for('login')}}" class="drop-text">Login</a></li>
                 <li><a href="{{ url_for('register')}}" class="drop-text">Register</a></li>
               </ul>
             </li>
-            <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
+            
           </ul>
         </nav>
         <!-- //nav -->
@@ -411,3 +410,16 @@
     <!--//footer-copy-write -->
   </body>
 </html>
+
+<script>
+  //declared outside of the AC.cart scope
+  var oCart;
+  
+  //set the response to oCart
+  AC.cart.get(function(response){ 
+oCart = response; 
+//set the count and subtotal to the values returned.
+$(".CartItemsCount").html( oCart.cart.totalItemCount );
+$(".CartSubTotal").html( "$" + oCart.cart.subtotal );
+});
+</script>

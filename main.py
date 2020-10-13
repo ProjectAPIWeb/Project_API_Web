@@ -60,7 +60,7 @@ def register() :
     return render_template('register.html', msg=msg)
 
 @app.route('/login', methods=['GET', 'POST'])
-def login() :
+def login() : 
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form :
         username = request.form['username']
@@ -82,17 +82,10 @@ def login() :
             
     return render_template('login.html', msg=msg)
 
-@app.route('/about', methods=['GET', 'POST'])
-def about() :
-    return render_template('about.html')
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact() :
     return render_template('contact.html')
-
-@app.route('/gallery', methods=['GET', 'POST'])
-def gallery() :
-    return render_template('gallery.html')
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu() :
@@ -100,6 +93,21 @@ def menu() :
     response = requests.request("GET", url)
     result = response.json()
     a = []
+    b = []
+    for i in result :
+        a.append(i["name"])
+        b.append(i["price"])
+
+    return render_template('menu.html', a=a, b=b)
+
+@app.route('/cart', methods=["GET", "POST"])
+def Cart() :
+    return render_template('cart.html')
+
+if __name__ == '__main__' :
+    app.run(debug=True, host='127.0.0.2')
+
+'''a = []
     b = []
     c = []
     for i in result :
@@ -110,16 +118,5 @@ def menu() :
         if 49 <= i['id'] <= 72 :
             c.append(i)
 
-        
-    return render_template('menu.html', a=a, b=b, c=c)
 
-@app.route('/recipe', methods=['GET', 'POST'])
-def recipe() :
-    return render_template('recipe.html')
-
-@app.route('/service', methods=['GET', 'POST'])
-def service() :
-    return render_template('service.html')
-
-if __name__ == '__main__' :
-    app.run(debug=True, host='127.0.0.2')
+    return render_template('menu.html', a=a, b=b, c=c)'''

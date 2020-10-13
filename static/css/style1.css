@@ -207,8 +207,9 @@ nav ul li {
   display: inline-block;
   float: left;
 }
-
-
+input:focus{
+  outline: none;   
+}
 /* Styling the links */
 
 nav ul li a {
@@ -497,6 +498,31 @@ background-color: #212121;
   -ms-background-size: cover;
   min-height: 800px;
 }
+
+.left,
+.right
+{
+  width: 10px;
+  height: 10px;
+  transform: 5s;
+  float: left;
+  box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+.left
+{
+  transform: rotate(45deg);
+}
+.right
+{
+  transform: rotate(225deg);
+}
+.left,
+.right
+{
+  box-shadow: -2px 2px 0 rgba(0, 0, 0, 1);
+}
+
 
 .headder-top {
   position: absolute;
