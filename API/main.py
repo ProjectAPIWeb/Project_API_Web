@@ -4,7 +4,7 @@ from flask_marshmallow import Marshmallow
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Mac126218@127.0.0.1:5432/Food'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://webadmin:ECZcnl63136@node4707-env-0491803.th.app.ruk-com.cloud:11031/Food'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -72,4 +72,4 @@ def delete_product(id) :
     return product_schema.jsonify(product)
 
 if __name__ == "__main__" :
-    app.run(debug=True)
+    app.run(host="0.0.0." ,debug=True)
