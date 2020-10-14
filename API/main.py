@@ -15,7 +15,8 @@ class Product(db.Model) :
     name = db.Column(db.String(100), unique=True)
     price = db.Column(db.Float)
 
-    def __init__(self, name, price) :
+    def __init__(self, id, name, price) :
+        self.id = id
         self.name = name
         self.price = price
     
@@ -28,10 +29,11 @@ products_schema = ProductSchema(many=True)
 
 @app.route('/product', methods=['POST'])
 def add_product() :
+    id = request.json['id']
     name = request.json['name']
     price = request.json['price']
 
-    new_product = Product(name, price)
+    new_product = Product(id, name, price)
 
     db.session.add(new_product)
     db.session.commit()
@@ -73,4 +75,4 @@ def delete_product(id) :
 
 if __name__ == "__main__" :
     app.debug = True
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="127.0.0.1", port=80)
