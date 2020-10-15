@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship, backref
+import uuid
 import requests
 import re
 
@@ -17,6 +19,23 @@ class User(db.Model) :
     name = Column(String)
     email = Column(String)
     password = Column(String)
+
+class Order(db.Model) :
+    __tablename__ = 'Order'
+    id = Column(String(35), primary_key=True, unique=True)
+    product = Column(String(100))
+    id_user = Column(Integer, ForeignKey('User.id'))
+    quantity = Column(Integer)
+
+    def __init__ (self, order=None, product=None, quantity=None) :
+        self.id = uuid.uuid4().hex
+        self.id_user = id_user
+        self.product = product
+        self.quantity = quantity
+    
+    def __repr__(self):
+        return '<Order_Product {}>'.format(self.id_user + " "+ self.product)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index() :
@@ -72,6 +91,7 @@ def login() :
 
         if account :
             if name == account.name and password == account.password :
+                session['logged_in'] = True
                 msg = "Login Successfully"
                 return render_template('index.html', msg=msg)
             else :
@@ -100,7 +120,9 @@ def menu() :
             b.append(i)
         if 49 <= i['id'] <= 72 :
             c.append(i)
-
+    if request.method == "POST" :
+        if request.form.get("cart") :
+            print(User.id)
     return render_template('menu.html', a=a, b=b, c=c)
 
 @app.route('/cart', methods=["GET", "POST"])

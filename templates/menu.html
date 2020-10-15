@@ -101,7 +101,9 @@
                       {{ product.name }}
                       <span class="time ml-auto">
                       {{ product.price }}</span>
-                      <button onclick="getproductitem()" type="button" class="btn btn-success"><i class="fa fa-cutlery" aria-hidden="true"></i></button>
+                      <form method ="post" action="/">
+                        <button type="submit" name="{{ product.name }}" value="Add Cart"> Add Cart </button>
+                      </form>  
                     </li>          
                   {% endfor %}
               </ul>
@@ -115,7 +117,9 @@
                       {{ product.name }}
                       <span class="time ml-auto">
                       {{ product.price }}</span>
-                      <button onclick="getproductitem()" type="button" class="btn btn-success"><i class="fa fa-cutlery" aria-hidden="true"></i></button>
+                      <form method ="post" action="/">
+                        <button type="submit" name="{{ product.name }}" value="Add Cart"> Add Cart </button>
+                      </form> 
                     </li>         
                   {% endfor %}
               </ul>
@@ -129,7 +133,9 @@
                       {{ product.name }}
                       <span class="time ml-auto">
                       {{ product.price }}</span>
-                      <button onclick="getproductitem()" type="button" class="btn btn-success"><i class="fa fa-cutlery" aria-hidden="true"></i></button>
+                      <form method ="post" action="/">
+                        <button type="submit" name="{{ product.name }}" value="Add Cart"> Add Cart </button>
+                      </form> 
                     </li>           
                   {% endfor %}
               </ul>
