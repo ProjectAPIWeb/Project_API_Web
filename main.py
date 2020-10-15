@@ -108,18 +108,5 @@ def Cart() :
     return render_template('cart.html')
 
 if __name__ == '__main__' :
-    app.run(debug=True, port=80,host='0.0.0.0')
+    app.run(debug=True)
 
-'''a = []
-    b = []
-    c = []
-    for i in result :
-        if 1 <= i['id'] <= 24 :
-            a.append(i)
-        if 25 <= i['id'] <= 48 :
-            b.append(i)
-        if 49 <= i['id'] <= 72 :
-            c.append(i)
-
-
-    return render_template('menu.html', a=a, b=b, c=c)'''
