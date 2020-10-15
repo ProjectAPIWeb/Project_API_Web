@@ -8,7 +8,7 @@ import re
 
 app = Flask(__name__)
 app.secret_key = 'Mac126218'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://webadmin:ECZcnl63136@node4707-env-0491803.th.app.ruk-com.cloud:5432/WebDatabase'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://webadmin:ECZcnl63136@node4707-env-0491803.th.app.ruk-com.cloud:11031/WebDatabase'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -35,6 +35,12 @@ class Order(db.Model) :
     
     def __repr__(self):
         return '<Order_Product {}>'.format(self.id_user + " "+ self.product)
+
+class PreOrder(db.Model) :
+    __tablename__ = 'PreOrder'
+    id  = Column(Integer, primary_key=True)
+    name_user = Column(String(100))
+    product = Column(String(100))
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -130,8 +136,12 @@ def menu() :
     if request.method == "POST" :
         if session['logged_in'] is True :
             if request.form.get("cart") :
-                print(request.form.get("cart"))
-                print(session['id'])
+                id = len(PreOrder.query.all()) + 1
+                name_user = session['name']
+                product = request.form.get("cart")
+                pre_order = PreOrder(id=id, name_user=name_user, product=product)
+                db.session.add(pre_order)
+                db.session.commit()
         else :
             Top = "Hi"
             msg = 'Please Login First'
@@ -140,7 +150,19 @@ def menu() :
 
 @app.route('/cart', methods=["GET", "POST"])
 def Cart() :
-    return render_template('cart.html')
+    url = "http://api-5496804.th.app.ruk-com.cloud/product"
+    response = requests.request("GET", url)
+    result = response.json()
+    Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
+    product_name = []
+    price = []
+    for i in Pre_Order :
+        if i.product not in product_name :
+            product_name.append(i.product)
+    for i in result :
+        if i['name'] in product_name :
+            price.append(i['price'])
+    return render_template('cart.html', a=product_name, b=price)
 
 @app.route('/logout')
 def logout():

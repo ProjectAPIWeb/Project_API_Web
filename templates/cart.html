@@ -85,13 +85,14 @@
         </div>
       </div>
       <!-- //banner -->
+      {%for product in a%} {%for price in a%}
       <div class="shopping-cart">
         <!-- Title -->
         <div class="title">
-          Shopping Bag
+          Order
         </div>
        
-        <!-- Product #1 -->
+       
         <div class="item">
           <div class="buttons">
             <span class="delete-btn"></span>
@@ -99,76 +100,23 @@
           </div>
        
           <div class="description">
-            <span>Common Projects</span>
-            <span>Bball High</span>
-            <span>White</span>
+            <span>{{prodcut}}</span>
           </div>
        
           <div class="quantity">
-            <button class="plus-btn" type="button" name="button">
-              <img src="plus.svg" alt="" />
+            <button class="fa fa-plus-square" type="button" name="button">
             </button>
             <input type="text" name="name" value="1">
-            <button class="minus-btn" type="button" name="button">
-              <img src="minus.svg" alt="" />
+            <button class="fa fa-minus-square" type="button" name="button">
             </button>
           </div>
        
-          <div class="total-price">$549</div>
+          <div class="total-price">{{price}}</div>
         </div>
+        
        
-        <!-- Product #2 -->
-        <div class="item">
-          <div class="buttons">
-            <span class="delete-btn"></span>
-            <span class="like-btn"></span>
-          </div>
-       
-          <div class="description">
-            <span>Maison Margiela</span>
-            <span>Future Sneakers</span>
-            <span>White</span>
-          </div>
-       
-          <div class="quantity">
-            <button class="plus-btn" type="button" name="button">
-              <img src="plus.svg" alt="" />
-            </button>
-            <input type="text" name="name" value="1">
-            <button class="minus-btn" type="button" name="button">
-              <img src="minus.svg" alt="" />
-            </button>
-          </div>
-       
-          <div class="total-price">$870</div>
-        </div>
-       
-        <!-- Product #3 -->
-        <div class="item">
-          <div class="buttons">
-            <span class="delete-btn"></span>
-            <span class="like-btn"></span>
-          </div>
-       
-          <div class="description">
-            <span>Our Legacy</span>
-            <span>Brushed Scarf</span>
-            <span>Brown</span>
-          </div>
-       
-          <div class="quantity">
-            <button class="plus-btn" type="button" name="button">
-              <img src="plus.svg" alt="" />
-            </button>
-            <input type="text" name="name" value="1">
-            <button class="minus-btn" type="button" name="button">
-              <img src="minus.svg" alt="" />
-            </button>
-          </div>
-       
-          <div class="total-price">$349</div>
-        </div>
       </div>
+      {% endfor %} {% endfor %}
       <!-- footer -->
       <footer class="py-lg-3 py-md-2 py-sm-3 py-2">
         <div class="container py-lg-4 py-md-4 py-sm-3 py-3">
