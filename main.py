@@ -45,8 +45,7 @@ def register() :
         email = request.form['email']
         account = User(id=id, name=username, email=email, password=password)
         Check = db.session.query(User).filter_by(name=username).first()
-        print(Check)
-        if username in Check.name :
+        if Check is None:
             msg = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             msg = 'Invalid email address!'
