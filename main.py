@@ -40,18 +40,18 @@ def register() :
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
         id = len(User.query.all()) + 1
-        name = request.form['username']
+        username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-        account = User(id=id, name=name, email=email, password=password)
-        Check = db.session.query(User).filter_by(name=name).first()
-        if name == Check.name :
+        account = User(id=id, name=username, email=email, password=password)
+        Check = db.session.query(User).filter_by(name=username).first()
+        if str(username) == Check.name :
             msg = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             msg = 'Invalid email address!'
-        elif not re.match(r'[A-Za-z0-9]+', name):
+        elif not re.match(r'[A-Za-z0-9]+', username):
             msg = 'Username must contain only characters and numbers!'
-        elif not name or not password or not email:
+        elif not username or not password or not email:
             msg = 'Please fill out the form!'
         else:
             db.session.add(account)
