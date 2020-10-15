@@ -108,7 +108,7 @@ def Cart() :
     return render_template('cart.html')
 
 if __name__ == '__main__' :
-    app.run(debug=True, host='127.0.0.2')
+    app.run(debug=True)
 
 '''a = []
     b = []
