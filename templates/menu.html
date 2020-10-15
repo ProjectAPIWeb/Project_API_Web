@@ -95,119 +95,43 @@
           <div class="col-lg-4 col-md-4">
             <div class="wls-hours-list">
               <ul>
-                <li class="d-flex"> <fieldset>
-                    <input type="hidden" name="add" value="1">
-                    <input type="button" name="submit" value="{{ a[0] }}" class="button" >
-                  </fieldset>
-                </form><span class="time ml-auto">{{ b[0] }}</span></li><form action="#" method="post" >
-                  
-                <li class="d-flex">{{ a[1] }}
-                  <form action="#" method="post">
-                  <fieldset>
-                    <input type="hidden" name="add" value="1">
-                    <input type="button" name="submit" value="Add " class="button">
-                  </fieldset>
-                </form><span class="time ml-auto">{{ b[1] }}</span></li>
-                <li class="d-flex">{{ a[2] }}
-                  <form action="#" method="post">
-                    <fieldset>
-                      <input type="hidden" name="add" value="1">
-                      <input type="button" name="submit" value="Add " class="button">
-                    </fieldset>
-                  </form><span class="time ml-auto">{{ b[2] }}</span></li>
-                <li class="d-flex">{{ a[3] }}
-                  <form action="#" method="post">
-                    <fieldset>
-                      <input type="hidden" name="add" value="1">
-                      <input type="button" name="submit" value="Add " class="button">
-                    </fieldset>
-                  </form><span class="time ml-auto">{{ b[3] }}</span></li>
-                <li class="d-flex">{{ a[4] }}<span class="time ml-auto">{{ b[4] }}</span></li>
-                <li class="d-flex">{{ a[5] }}<span class="time ml-auto">{{ b[5] }}</span></li>
-                <li class="d-flex">{{ a[6] }}<span class="time ml-auto">{{ b[6] }}</span></li>
-                <li class="d-flex">{{ a[7] }}<span class="time ml-auto">{{ b[7] }}</span></li>
-                <li class="d-flex">{{ a[8] }}<span class="time ml-auto">{{ b[8] }}</span></li>
-                <li class="d-flex">{{ a[9] }}<span class="time ml-auto">{{ b[9] }}</span></li>
-                <li class="d-flex">{{ a[71] }}<span class="time ml-auto">{{ b[71] }}</span></li>
-                <li class="d-flex">{{ a[10] }}<span class="time ml-auto">{{ b[10] }}</span></li>
-                <li class="d-flex">{{ a[11] }}<span class="time ml-auto">{{ b[11] }}</span></li>
-                <li class="d-flex">{{ a[12] }}<span class="time ml-auto">{{ b[12] }}</span></li>
-                <li class="d-flex">{{ a[13] }}<span class="time ml-auto">{{ b[13] }}</span></li>
-                <li class="d-flex">{{ a[14] }}<span class="time ml-auto">{{ b[14] }}</span></li>
-                <li class="d-flex">{{ a[15] }}<span class="time ml-auto">{{ b[15] }}</span></li>
-                <li class="d-flex">{{ a[16] }}<span class="time ml-auto">{{ b[16] }}</span></li>
-                <li class="d-flex">{{ a[17] }}<span class="time ml-auto">{{ b[17] }}</span></li>
-                <li class="d-flex">{{ a[18] }}<span class="time ml-auto">{{ b[18] }}</span></li>
-                <li class="d-flex">{{ a[19] }}<span class="time ml-auto">{{ b[19] }}</span></li>
-                <li class="d-flex">{{ a[20] }}<span class="time ml-auto">{{ b[20] }}</span></li>
-                <li class="d-flex">{{ a[21] }}<span class="time ml-auto">{{ b[21] }}</span></li>
-                <li class="d-flex">{{ a[22] }}<span class="time ml-auto">{{ b[22] }}</span></li>
+                <!--<li class="d-flex">{{ a[0] }}<span class="time ml-auto">{{ b[0] }}</span><button onclick="" type="button" class="btn btn-primary">Add to Cart</button>-->
+                  {% for product in a %}
+                    <li class="d-flex">
+                      {{ product.name }}
+                      <span class="time ml-auto">
+                      {{ product.price }}</span>
+                      <button onclick="getproductitem()" type="button" class="btn btn-success"><i class="fa fa-cutlery" aria-hidden="true"></i></button>
+                    </li>          
+                  {% endfor %}
               </ul>
             </div>
           </div>
           <div class="col-lg-4 col-md-4">
             <div class="wls-hours-list">
               <ul>
-                <li class="d-flex">{{ a[23] }}<span class="time ml-auto">{{ b[23] }}</span></li>
-                <form action="#" method="post" >
-                  <fieldset>
-                    <input type="hidden" name="add" value="1">
-                    <input type="button" name="submit" value="Add " class="button">
-                  </fieldset>
-                </form>
-                <li class="d-flex">{{ a[24] }}<span class="time ml-auto">{{ b[24] }}</span></li>
-                <li class="d-flex">{{ a[25] }}<span class="time ml-auto">{{ b[25] }}</span></li>
-                <li class="d-flex">{{ a[26] }}<span class="time ml-auto">{{ b[26] }}</span></li>
-                <li class="d-flex">{{ a[27] }}<span class="time ml-auto">{{ b[27] }}</span></li>
-                <li class="d-flex">{{ a[28] }}<span class="time ml-auto">{{ b[28] }}</span></li>
-                <li class="d-flex">{{ a[29] }}<span class="time ml-auto">{{ b[29] }}</span></li>
-                <li class="d-flex">{{ a[30] }}<span class="time ml-auto">{{ b[30] }}</span></li>
-                <li class="d-flex">{{ a[31] }}<span class="time ml-auto">{{ b[31] }}</span></li>
-                <li class="d-flex">{{ a[32] }}<span class="time ml-auto">{{ b[32] }}</span></li>
-                <li class="d-flex">{{ a[33] }}<span class="time ml-auto">{{ b[33] }}</span></li>
-                <li class="d-flex">{{ a[34] }}<span class="time ml-auto">{{ b[34] }}</span></li>
-                <li class="d-flex">{{ a[35] }}<span class="time ml-auto">{{ b[35] }}</span></li>
-                <li class="d-flex">{{ a[36] }}<span class="time ml-auto">{{ b[36] }}</span></li>
-                <li class="d-flex">{{ a[37] }}<span class="time ml-auto">{{ b[37] }}</span></li>
-                <li class="d-flex">{{ a[38] }}<span class="time ml-auto">{{ b[38] }}</span></li>
-                <li class="d-flex">{{ a[39] }}<span class="time ml-auto">{{ b[39] }}</span></li>
-                <li class="d-flex">{{ a[40] }}<span class="time ml-auto">{{ b[40] }}</span></li>
-                <li class="d-flex">{{ a[41] }}<span class="time ml-auto">{{ b[41] }}</span></li>
-                <li class="d-flex">{{ a[42] }}<span class="time ml-auto">{{ b[42] }}</span></li>
-                <li class="d-flex">{{ a[43] }}<span class="time ml-auto">{{ b[43] }}</span></li>
-                <li class="d-flex">{{ a[44] }}<span class="time ml-auto">{{ b[44] }}</span></li>
-                <li class="d-flex">{{ a[45] }}<span class="time ml-auto">{{ b[45] }}</span></li>
-                <li class="d-flex">{{ a[46] }}<span class="time ml-auto">{{ b[46] }}</span></li>
+                {% for product in b %}
+                    <li class="d-flex">
+                      {{ product.name }}
+                      <span class="time ml-auto">
+                      {{ product.price }}</span>
+                      <button onclick="getproductitem()" type="button" class="btn btn-success"><i class="fa fa-cutlery" aria-hidden="true"></i></button>
+                    </li>         
+                  {% endfor %}
               </ul>
             </div>
           </div>
           <div class="col-lg-4 col-md-4">
             <div class="wls-hours-list">
               <ul>
-                <li class="d-flex">{{ a[47] }}<span class="time ml-auto">{{ b[47] }}</span></li>
-                <li class="d-flex">{{ a[48] }}<span class="time ml-auto">{{ b[48] }}</span></li>
-                <li class="d-flex">{{ a[49] }}<span class="time ml-auto">{{ b[49] }}</span></li>
-                <li class="d-flex">{{ a[50] }}<span class="time ml-auto">{{ b[50] }}</span></li>
-                <li class="d-flex">{{ a[51] }}<span class="time ml-auto">{{ b[51] }}</span></li>
-                <li class="d-flex">{{ a[52] }}<span class="time ml-auto">{{ b[52] }}</span></li>
-                <li class="d-flex">{{ a[53] }}<span class="time ml-auto">{{ b[53] }}</span></li>
-                <li class="d-flex">{{ a[54] }}<span class="time ml-auto">{{ b[54] }}</span></li>
-                <li class="d-flex">{{ a[55] }}<span class="time ml-auto">{{ b[55] }}</span></li>
-                <li class="d-flex">{{ a[56] }}<span class="time ml-auto">{{ b[56] }}</span></li>
-                <li class="d-flex">{{ a[57] }}<span class="time ml-auto">{{ b[57] }}</span></li>
-                <li class="d-flex">{{ a[58] }}<span class="time ml-auto">{{ b[58] }}</span></li>
-                <li class="d-flex">{{ a[59] }}<span class="time ml-auto">{{ b[59] }}</span></li>
-                <li class="d-flex">{{ a[60] }}<span class="time ml-auto">{{ b[60] }}</span></li>
-                <li class="d-flex">{{ a[61] }}<span class="time ml-auto">{{ b[61] }}</span></li>
-                <li class="d-flex">{{ a[62] }}<span class="time ml-auto">{{ b[62] }}</span></li>
-                <li class="d-flex">{{ a[63] }}<span class="time ml-auto">{{ b[63] }}</span></li>
-                <li class="d-flex">{{ a[64] }}<span class="time ml-auto">{{ b[64] }}</span></li>
-                <li class="d-flex">{{ a[65] }}<span class="time ml-auto">{{ b[65] }}</span></li>
-                <li class="d-flex">{{ a[66] }}<span class="time ml-auto">{{ b[66] }}</span></li>
-                <li class="d-flex">{{ a[67] }}<span class="time ml-auto">{{ b[67] }}</span></li>
-                <li class="d-flex">{{ a[68] }}<span class="time ml-auto">{{ b[68] }}</span></li>
-                <li class="d-flex">{{ a[69] }}<span class="time ml-auto">{{ b[69] }}</span></li>
-                <li class="d-flex">{{ a[70] }}<span class="time ml-auto">{{ b[70] }}</span></li>
+                {% for product in c %}
+                    <li class="d-flex">
+                      {{ product.name }}
+                      <span class="time ml-auto">
+                      {{ product.price }}</span>
+                      <button onclick="getproductitem()" type="button" class="btn btn-success"><i class="fa fa-cutlery" aria-hidden="true"></i></button>
+                    </li>           
+                  {% endfor %}
               </ul>
             </div>
           </div>

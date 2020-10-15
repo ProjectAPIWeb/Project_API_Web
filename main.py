@@ -1,21 +1,26 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from flask_mysqldb import MySQL
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, String
 import requests
 import re
 
 app = Flask(__name__)
 
-app.secret_key = 'Mac126218'
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'test'
-app.config['MYSQL_PASSWORD'] = 'INE@2562'
-app.config['MYSQL_DB'] = 'project'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-mysql = MySQL(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://webadmin:ECZcnl63136@node4707-env-0491803.th.app.ruk-com.cloud:11031/WebDatabase'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class User(db.Model) :
+    __tablename__ = "User"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    email = Column(String)
+    password = Column(String)
 
 @app.route('/', methods=['GET', 'POST'])
 def index() :
-    url = "http://127.0.0.1:5000/product"
+    url = "http://api-5496804.th.app.ruk-com.cloud/product"
     response = requests.request("GET", url)
     result = response.json()
     a = []
@@ -33,27 +38,24 @@ def index() :
 @app.route('/register', methods=['GET', 'POST'])
 def register() :
     msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
-        username = request.form['username']
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
+        id = len(User.query.all()) + 1
+        name = request.form['username']
         password = request.form['password']
         email = request.form['email']
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM useraccounts WHERE username = %s AND password = %s', (username, password))
-
-        account = cursor.fetchone()
-
-        if account:
+        account = User(id=id, name=name, email=email, password=password)
+        Check = db.session.query(User).filter_by(name=name).first()
+        if name == Check.name :
             msg = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             msg = 'Invalid email address!'
-        elif not re.match(r'[A-Za-z0-9]+', username):
+        elif not re.match(r'[A-Za-z0-9]+', name):
             msg = 'Username must contain only characters and numbers!'
-        elif not username or not password or not email:
+        elif not name or not password or not email:
             msg = 'Please fill out the form!'
         else:
-
-            cursor.execute('INSERT INTO useraccounts VALUES (NULL, %s, %s, %s)', (username, password, email))
-            mysql.connection.commit()
+            db.session.add(account)
+            db.session.commit()
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
         msg = 'Please fill out the form!'
@@ -63,25 +65,21 @@ def register() :
 def login() : 
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form :
-        username = request.form['username']
+        name = request.form['username']
         password = request.form['password']
 
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM useraccounts WHERE username = %s AND password = %s', (username, password))
+        account = db.session.query(User).filter_by(name=name).first()
 
-        account = cursor.fetchone()
+        if account :
+            if name == account.name and password == account.password :
+                msg = "Login Successfully"
+                return render_template('index.html', msg=msg)
+            else :
+                msg = 'Incorrect username/password!' 
+        else :
+            msg = 'Incorrect username/password!'  
 
-        if account:
-            session['loggedin'] = True
-            session['id'] = account['id']
-            session['username'] = account['username']
-            msg = "Successfully"
-            return render_template('index.html', msg=msg)
-        else:
-            msg = 'Incorrect username/password!'     
-            
     return render_template('login.html', msg=msg)
-
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact() :
@@ -89,16 +87,21 @@ def contact() :
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu() :
-    url = "http://127.0.0.1:5000/product"
+    url = "http://api-5496804.th.app.ruk-com.cloud/product"
     response = requests.request("GET", url)
     result = response.json()
     a = []
     b = []
+    c = []
     for i in result :
-        a.append(i["name"])
-        b.append(i["price"])
+        if 1 <= i['id'] <= 24 :
+            a.append(i)
+        if 25 <= i['id'] <= 48 :
+            b.append(i)
+        if 49 <= i['id'] <= 72 :
+            c.append(i)
 
-    return render_template('menu.html', a=a, b=b)
+    return render_template('menu.html', a=a, b=b, c=c)
 
 @app.route('/cart', methods=["GET", "POST"])
 def Cart() :
