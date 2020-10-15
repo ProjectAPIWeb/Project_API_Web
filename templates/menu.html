@@ -38,6 +38,10 @@
   <body>
     <!--headder-->
     <div class="header-outs inner_page-banner " id="home">
+      <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>{{ Top }}</strong> {{ msg }}
+      </div>
       <div class="headder-top">
         <!-- nav -->
         <nav >
@@ -53,16 +57,8 @@
             <li class="active"><a href="{{ url_for('index')}}">Home</a></li>
             <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('menu')}}">Menu</a></li>
             <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
-            <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
-              <a href="#"><i class="fa fa-user-o" aria-hidden="true"></i></a>
-              <input type="checkbox" id="drop-2">
-              <ul>
-                <li><a href="#" class="drop-text">Account</a></li>
-                <li><a href="{{ url_for('login')}}" class="drop-text">Login</a></li>
-                <li><a href="{{ url_for('register')}}" class="drop-text">Register</a></li>
-              </ul>
-            </li>
-            
+            <li><a href="{{ url_for('login')}}">Login</a></li>
+            <li><a href="{{ url_for('register')}}">Regsiter</a></li>
           </ul>
         </nav>
         <!-- //nav -->
@@ -101,8 +97,8 @@
                       {{ product.name }}
                       <span class="time ml-auto">
                       {{ product.price }}</span>
-                      <form method ="post" action="/">
-                        <button type="submit" name="{{ product.name }}" value="Add Cart"> Add Cart </button>
+                      <form method ="post" >
+                        <button type="submit" name="cart" value="{{ product.name }}"> Add Cart </button>
                       </form>  
                     </li>          
                   {% endfor %}
@@ -117,8 +113,8 @@
                       {{ product.name }}
                       <span class="time ml-auto">
                       {{ product.price }}</span>
-                      <form method ="post" action="/">
-                        <button type="submit" name="{{ product.name }}" value="Add Cart"> Add Cart </button>
+                      <form method ="post" >
+                        <button type="submit" name="cart" value='{{ product.name }} '> Add Cart </button>
                       </form> 
                     </li>         
                   {% endfor %}
@@ -133,8 +129,8 @@
                       {{ product.name }}
                       <span class="time ml-auto">
                       {{ product.price }}</span>
-                      <form method ="post" action="/">
-                        <button type="submit" name="{{ product.name }}" value="Add Cart"> Add Cart </button>
+                      <form method ="post" >
+                        <button type="submit" name="cart" value="{{ product.name }}"> Add Cart </button>
                       </form> 
                     </li>           
                   {% endfor %}

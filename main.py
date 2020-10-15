@@ -7,8 +7,8 @@ import requests
 import re
 
 app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://webadmin:ECZcnl63136@node4707-env-0491803.th.app.ruk-com.cloud:5432/WebDatabase'
+app.secret_key = 'Mac126218'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://webadmin:ECZcnl63136@node4707-env-0491803.th.app.ruk-com.cloud:11031/WebDatabase'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -54,6 +54,12 @@ def index() :
             c.append(i)
     return render_template('index.html', a=a , b=b ,c=c)
 
+@app.route('/home')
+def home():
+    if 'logged_in' in session:
+        return render_template('home.html', username=session['name'])
+    return redirect(url_for('login'))
+
 @app.route('/register', methods=['GET', 'POST'])
 def register() :
     msg = ''
@@ -92,8 +98,9 @@ def login() :
         if account :
             if name == account.name and password == account.password :
                 session['logged_in'] = True
-                msg = "Login Successfully"
-                return render_template('index.html', msg=msg)
+                session['id'] = account.id
+                session['name'] = account.name
+                return redirect(url_for('home'))
             else :
                 msg = 'Incorrect username/password!' 
         else :
@@ -121,13 +128,26 @@ def menu() :
         if 49 <= i['id'] <= 72 :
             c.append(i)
     if request.method == "POST" :
-        if request.form.get("cart") :
-            print(User.id)
+        if session['logged_in'] is True :
+            if request.form.get("cart") :
+                print(request.form.get("cart"))
+                print(session['id'])
+        else :
+            Top = "Hi"
+            msg = 'Please Login First'
+            return render_template('menu.html', a=a, b=b, c=c, msg=msg, Top=Top)
     return render_template('menu.html', a=a, b=b, c=c)
 
 @app.route('/cart', methods=["GET", "POST"])
 def Cart() :
     return render_template('cart.html')
+
+@app.route('/logout')
+def logout():
+   session.pop('logged_in', None)
+   session.pop('id', None)
+   session.pop('name', None)
+   return redirect(url_for('login'))
 
 if __name__ == '__main__' :
     app.run(debug=True)

@@ -53,16 +53,8 @@
             <li class="active"><a href="{{ url_for('index')}}">Home</a></li>
             <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('menu')}}">Menu</a></li>
             <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
-            <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
-              <a href="#"><i class="fa fa-user-o" aria-hidden="true"></i></a>
-              <input type="checkbox" id="drop-2">
-              <ul>
-                <li><a href="#" class="drop-text">Account</a></li>
-                <li><a href="{{ url_for('login')}}" class="drop-text">Login</a></li>
-                <li><a href="{{ url_for('register')}}" class="drop-text">Register</a></li>
-              </ul>
-            </li>
-            
+            <li><a href="{{ url_for('login')}}">Login</a></li>
+            <li><a href="{{ url_for('register')}}">Regsiter</a></li>
           </ul>
         </nav>
         <!-- //nav -->
