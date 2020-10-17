@@ -14,14 +14,14 @@
       <meta name="keywords" content="Sapid Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
       <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-        
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-      </script>
+      addEventListener("load", function () {
+      	setTimeout(hideURLbar, 0);
+      }, false);
+      
+      function hideURLbar() {
+      	window.scrollTo(0, 1);
+      }
+    </script>
       <script src="{{ url_for('static', filename='js/testCart')}}"></script>
       <!--//meta tags ends here-->
       <!--booststrap-->
@@ -55,8 +55,7 @@
               <li class="active"><a href="{{ url_for('index')}}">Home</a></li>
               <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('menu')}}">Menu</a></li>
               <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
-              <li><a href="{{ url_for('login')}}">Login</a></li>
-              <li><a href="{{ url_for('register')}}">Regsiter</a></li>
+              <li><a href="{{ url_for('logout')}}">Logout</a></li>
             </ul>
           </nav>
           <!-- //nav -->
@@ -85,38 +84,49 @@
         </div>
       </div>
       <!-- //banner -->
-      {%for product in a%} {%for price in a%}
-      <div class="shopping-cart">
+      
         <!-- Title -->
         <div class="title">
-          Order
+          Shopping Bag
         </div>
        
-       
-        <div class="item">
+        <!-- Product #1 -->
+        {%for i in a%}
+        <div class="item"> 
           <div class="buttons">
             <span class="delete-btn"></span>
             <span class="like-btn"></span>
           </div>
-       
+          
           <div class="description">
-            <span>{{prodcut}}</span>
+            <span>{{ i.product }}</span>
           </div>
-       
+  
           <div class="quantity">
-            <button class="fa fa-plus-square" type="button" name="button">
-            </button>
-            <input type="text" name="name" value="1">
-            <button class="fa fa-minus-square" type="button" name="button">
-            </button>
+            {{ i.qty }}
           </div>
-       
-          <div class="total-price">{{price}}</div>
+          <form method = 'post'>
+            <input type="text" name="qty" required autofocus>
+            <button type="submit" name=Add value="{{ i.product }}">Add</button>
+          </form>
+          <div class="total-price">{{ i.price }} THB</div>
+          <form method = 'post'>
+            <button type="submit" name="Remove" value="{{i.product}}">Remove</button>
+          </form>
+       </div> 
+      {%endfor%}
+      <div class="item"> 
+        <div class="buttons">
+          <span class="delete-btn"></span>
+          <span class="like-btn"></span>
         </div>
+        <form method ="post" >
+          <button type="submit" name="Order" value="Submit" >Next</button>
+        </form>
         
-       
-      </div>
-      {% endfor %} {% endfor %}
+     </div> 
+        
+
       <!-- footer -->
       <footer class="py-lg-3 py-md-2 py-sm-3 py-2">
         <div class="container py-lg-4 py-md-4 py-sm-3 py-3">

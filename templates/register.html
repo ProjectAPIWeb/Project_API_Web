@@ -12,7 +12,15 @@ Author URL: http://w3layouts.com
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+		
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	  </script>
 	<!-- Style -->
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}" type="text/css" media="all" />
 </head>

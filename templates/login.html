@@ -11,7 +11,15 @@ Author URL: http://w3layouts.com
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+		
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	  </script>
 	<!-- Style -->
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}" type="text/css" media="all" />
 </head>
@@ -26,7 +34,7 @@ Author URL: http://w3layouts.com
 				</div>
 				<div class="form-section">
 					<h3>Login</h3>
-					<form action="{{ url_for('login')}}" method="post" class="signin-form">
+					<form action="{{ url_for('login')}}" method="post" class="signin-form" >
 						<div class="form-input">
 							<input type="text" name="username" placeholder="Username" id="username" required autofocus>
 						</div>
@@ -34,7 +42,7 @@ Author URL: http://w3layouts.com
 							<input type="password" name="password" placeholder="Password" id="password" required="">
                         </div>
                         <div class="msg">{{ msg }}</div>
-						<button type="submit" class="btn btn-primary theme-button mt-4">Sign Up</button>
+						<button type="submit" class="btn btn-primary theme-button mt-4">Sign In</button>
 					</form><p class="signup">Already a customer? <a href="{{ url_for('register')}}" class="signuplink">Register now</a></p>
 				</div>
 			</div>

@@ -1,0 +1,253 @@
+<!--A Design by W3layouts
+  Author: W3layout
+  Author URL: http://w3layouts.com
+  License: Creative Commons Attribution 3.0 Unported
+  License URL: http://creativecommons.org/licenses/by/3.0/
+  -->
+  <!DOCTYPE html>
+  <html lang="zxx">
+    <head>
+      <title>Test</title>
+      <!--meta tags -->
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="keywords" content="Sapid Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+        Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+        <script>
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
+            
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+          </script>
+      <script src="/store/inc/clientapi/ac-client-api.js"></script>
+      <!--//meta tags ends here-->
+      <!--booststrap-->
+      <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all">
+      <!--//booststrap end-->
+      <!-- font-awesome icons -->
+      <link href="{{ url_for('static', filename='css/font-awesome.min1.css')}}" rel="stylesheet">
+      <!-- //font-awesome icons -->
+      <!--stylesheets-->
+      <link href="{{ url_for('static', filename='css/style1.css')}}" rel='stylesheet' type='text/css' media="all">
+      <!--//stylesheets-->
+      <link href="{{ url_for('static', filename='//fonts.googleapis.com/css?family=Oswald:400,500,600,700')}}" rel="stylesheet">
+      <link href="{{ url_for('static', filename='//fonts.googleapis.com/css?family=Open+Sans:400,600,700')}}" rel="stylesheet">
+      
+
+      <style>
+        body {
+          font-family: Arial;
+          font-size: 17px;
+          padding: 8px;
+        }
+        
+        * {
+          box-sizing: border-box;
+        }
+        
+        .row1 {
+          display: -ms-flexbox; /* IE10 */
+          display: flex;
+          -ms-flex-wrap: wrap; /* IE10 */
+          flex-wrap: wrap;
+          margin: 0 -16px;
+        }
+        
+        .col-25 {
+          -ms-flex: 25%; /* IE10 */
+          flex: 25%;
+        }
+        
+        .col-50 {
+          -ms-flex: 50%; /* IE10 */
+          flex: 50%;
+        }
+        
+        .col-75 {
+          -ms-flex: 75%; /* IE10 */
+          flex: 75%;
+        }
+        
+        .col-25,
+        .col-50,
+        .col-75 {
+          padding: 0 16px;
+        }
+        
+        .container {
+          background-color: #f2f2f2;
+          padding: 5px 20px 15px 20px;
+          border: 1px solid lightgrey;
+          border-radius: 3px;
+        }
+        
+        input[type=text] {
+          width: 100%;
+          margin-bottom: 20px;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+        }
+        
+        label {
+          margin-bottom: 10px;
+          display: block;
+        }
+        
+        .icon-container {
+          margin-bottom: 20px;
+          padding: 7px 0;
+          font-size: 24px;
+        }
+        
+        .btn {
+          background-color: #4CAF50;
+          color: white;
+          padding: 12px;
+          margin: 10px 0;
+          border: none;
+          width: 100%;
+          border-radius: 3px;
+          cursor: pointer;
+          font-size: 17px;
+        }
+        
+        .btn:hover {
+          background-color: #45a049;
+        }
+        
+        hr {
+          border: 1px solid lightgrey;
+        }
+        
+        span.price {
+          float: right;
+          color: grey;
+        }
+        
+        /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+        </style>
+    </head>
+    <body>
+      <div class="main-top" id="home">
+        <!-- header -->
+          <!-- nav -->
+          <div class="headder-top">
+            <!-- nav -->
+            <nav >
+              <div id="logo">
+                <h1><a href="{{ url_for('index')}}">Project 01</a></h1>
+              </div>
+              <label for="drop" class="toggle">Menu</label>
+              <input type="checkbox" id="drop">
+              <ul class="menu mt-2">
+                <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+                  <a href="{{ url_for('Cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true" ></i></a>
+                </li>
+                <li class="active"><a href="{{ url_for('index')}}">Home</a></li>
+                <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('menu')}}">Menu</a></li>
+                <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
+                <li><a href="{{ url_for('logout')}}">Logout</a></li>
+              </ul>
+            </nav>
+            <!-- //nav -->
+            </div>
+          </div>
+        <!-- //header -->
+        <!-- banner -->
+        <div>
+        <h2>Responsive Checkout Form</h2>
+<div class="row1">
+  <div class="col-75">
+    <div class="container">
+      <form method="post">
+      
+        <div class="row1">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="John M. Doe" required autofocus>
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input type="text" id="email" name="email" placeholder="john@example.com" required autofocus>
+            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required autofocus>
+            <label for="city"><i class="fa fa-institution"></i> City</label>
+            <input type="text" id="city" name="city" placeholder="New York" required autofocus>
+
+            <div class="row1">
+              <div class="col-50">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="NY" required autofocus>
+              </div>
+              <div class="col-50">
+                <label for="zip">Zip</label>
+                <input type="text" id="zip" name="zip" placeholder="10001" required autofocus>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-50">
+            <h3>Payment</h3>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="John More Doe" required autofocus>
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required autofocus>
+            <label for="expmonth">Exp Month</label>
+            <input type="text" id="expmonth" name="expmonth" placeholder="September" required autofocus>
+            <div class="row1">
+              <div class="col-50">
+                <label for="expyear">Exp Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2018" required autofocus>
+              </div>
+              <div class="col-50">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="352" required autofocus>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <button type="submit" name="Order" value="Submit">Continue to Checkout</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-25">
+    <div class="container">
+      <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <b>{{ c }}</b></span></h4>
+      {%for i in a%}
+      <p><a>{{i.product}}  {{i.qty}}</a> <span class="price">{{i.price}}</span></p>
+      {%endfor%}
+      <hr>
+      <p>Total <span class="price" style="color:black"><b>{{ b }}</b></span></p>
+    </div>
+  </div>
+</div>
+</div>
+      <!--//Clients  -->
+      <!-- footer -->
+      <!--//footer-copy-write -->
+    </body>
+  </html>
+  
+  <script>
+    //declared outside of the AC.cart scope
+    var oCart;
+    
+    //set the response to oCart
+    AC.cart.get(function(response){ 
+  oCart = response; 
+  //set the count and subtotal to the values returned.
+  $(".CartItemsCount").html( oCart.cart.totalItemCount );
+  $(".CartSubTotal").html( "$" + oCart.cart.subtotal );
+  });
+  </script>
