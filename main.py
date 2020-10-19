@@ -104,7 +104,24 @@ def login() :
                 session['name'] = account.name
                 session["password"] = account.password
                 session["email"] = account.email
-                session["time"] = 0
+                Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
+                Order_Time = db.session.query(Order).filter_by(name=session['name']).all()
+                P = []
+                T = []
+                for i in Pre_Order :
+                    P.append(int(i.time))
+                for i in Order_Time :
+                    T.append(int(i.time))
+                if T == [] and P == [] :
+                    session['time'] = 1
+                if T == [] and P != [] :
+                    session['time'] = max(P)
+                if T != [] and P != [] :
+                    if max(T) == max(P) :
+                        session['time'] = max(T) + 1
+                    else :
+                        session['time'] = max(P)
+                
                 text = f"Welcome Back {session['name']}"
                 return home(text)
             else :
@@ -147,12 +164,20 @@ def menu() :
                     Order_Time = db.session.query(Order).filter_by(name=session['name']).all()
                     P = []
                     T = []
+                    O = []
                     for j in Order_Time :
                         T.append(int(j.time))
-                    if T == [] :
+                    for i in Pre_Order :
+                        O.append(int(i.time))
+                    if T == [] and O == [] :
                         session['time'] = 1
-                    if T != [] :
-                        session['time'] = max(T) + 1
+                    elif O != [] and T == [] :
+                        session['time'] = max(O)
+                    elif O != [] and T != [] :
+                        if max(O) == max(T) :
+                            session['time'] = max(T) +1
+                        elif max(O) > max(T) :
+                            session['time'] = max(O)
                     for i in Pre_Order :
                         if i.time == session['time'] :
                             P.append(i.product)
@@ -196,41 +221,38 @@ def profile() :
 def Cart() :
     if 'logged_in' in session :
         Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
+        P = [] 
         product_name = []
-        try :
-            if session["time"] != 0 :
-                for i in Pre_Order :
-                    if i.product not in product_name and i.time == session['time']  :
-                        value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
-                        product_name.append(value)
-                    if request.method == "POST" :
-                        if session['logged_in'] is True :
-                            if request.form.get("Order") :
-                                return redirect(url_for('total'))
-                            if request.form.get("Remove") :
-                                for i in Pre_Order :
-                                    if i.product == request.form.get("Remove") :
-                                        db.session.query(PreOrder).filter_by(id=i.id).delete()
+        for i in Pre_Order :
+            P.append(int(i.time))
+        if P == [] or session['time'] not in P :
+            text = "Please Should Your Order First"
+            return home(text)
+        else :
+            for i in Pre_Order :
+                if i.product not in product_name and i.time == session['time']  :
+                    value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
+                    product_name.append(value)
+                if request.method == "POST" :
+                    if session['logged_in'] is True :
+                        if request.form.get("Order") :
+                            return redirect(url_for('total'))
+                        if request.form.get("Remove") :
+                            for i in Pre_Order :
+                                if i.product == request.form.get("Remove") :
+                                    db.session.query(PreOrder).filter_by(id=i.id).delete()
+                                    db.session.commit()
+                                    return redirect(url_for('Cart'))
+                        if request.form.get("Add") :
+                            for i in Pre_Order :
+                                if i.product == request.form.get("Add") and i.time == session["time"] :
+                                    if int(request.form.get('qty')) > 0 :
+                                        i.qty = request.form.get('qty')
                                         db.session.commit()
-                                        return redirect(url_for('Cart'))
-                            if request.form.get("Add") :
-                                for i in Pre_Order :
-                                    if i.product == request.form.get("Add") and i.time == session["time"] :
-                                        if int(request.form.get('qty')) > 0 :
-                                            i.qty = request.form.get('qty')
-                                            db.session.commit()
-                                        else :
-                                            i.qty = 1
-                                            db.session.commit()
-                                return redirect(url_for("Cart"))
-                if len(product_name) == 0 :
-                    text = "Please Should Your Order First"
-                    return home(text)
-            else :
-                text = "Please Should Your Order First"
-                return home(text)
-        except KeyError :
-            return render_template('cart.html',a='')
+                                    else :
+                                        i.qty = 1
+                                        db.session.commit()
+                            return redirect(url_for("Cart"))
         
         return render_template('cart.html', a=product_name)
     else :
@@ -243,7 +265,7 @@ def total() :
         price = 0
         Cart = 0
         for i in Pre_Order:
-            if i.product not in product_name  :
+            if i.product not in product_name  and i.time == session['time'] :
                 print(i.product)
                 value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
                 product_name.append(value)

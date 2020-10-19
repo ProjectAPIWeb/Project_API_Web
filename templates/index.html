@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
   <head>
-    <title>Test</title>
+    <title>Thai Food Delivery</title>
     <!--meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,7 +44,7 @@
           <!-- nav -->
           <nav >
             <div id="logo">
-              <h1><a href="{{ url_for('index')}}">Project 01</a></h1>
+              <h1><a href="{{ url_for('index')}}">Thai Food Delivery</a></h1>
             </div>
             <label for="drop" class="toggle">Menu</label>
             <input type="checkbox" id="drop">
@@ -66,10 +66,10 @@
       <div class="main-banner">
         <div class="container-fluid">
           <div class="style-banner ">
-            <h4>Header</h4>
-            <h4>Header</h4>
+            <h4>Welcome to</h4>
+            <h4>Thai Food Delivery</h4>
             <div class="two-demo-button mt-md-4 mt-3">
-              <p> Text</p>
+              <p>Enjoy Your Eating</p>
             </div>
             <div class="social-icons mt-lg-4 mt-3">
               <ul>
@@ -88,31 +88,25 @@
     <!-- about -->
     <section class="about py-lg-4 py-md-3 py-sm-3 py-3" id="about">
       <div class="container pt-lg-5 pt-md-4 pt-sm-4 pt-3">
-        <h6 class="text-center top-title mb-2">Header</h6>
-        <h3 class="text-center title mb-3">Header</h3>
+        <h6 class="text-center top-title mb-2">Feed Your Good</h6>
+        <h3 class="text-center title mb-3">Savory food</h3>
         <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
-          <p>Text</p>
+          <p>Thai food</p>
         </div>
       </div>
       <div class="container-fluid pb-lg-5 pb-md-4 pb-sm-4 pb-3">
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-6 about-fashion-one">
-            <img src="{{ url_for('static', filename='images/a1.jpg')}}" alt="news image" class="img-fluid">
+            <img src="{{ url_for('static', filename='images/c1.jpg')}}" alt="news image" class="img-fluid">
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 about-fashion-one mt-lg-5 mt-md-4 mt-sm-0">
-            <img src="{{ url_for('static', filename='images/a2.jpg')}}" alt="news image" class="img-fluid">
+            <img src="{{ url_for('static', filename='images/c2.jpg')}}" alt="news image" class="img-fluid">
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 about-fashion-one pt-lg-4 mt-lg-5 mt-md-4 mt-sm-3">
-            <img src="{{ url_for('static', filename='images/a3.jpg')}}" alt="news image" class="img-fluid">
+            <img src="{{ url_for('static', filename='images/c3.jpg')}}" alt="news image" class="img-fluid">
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 about-fashion-one">
-            <img src="{{ url_for('static', filename='images/a4.jpg')}}" alt="news image" class="img-fluid">
-          </div>
-        </div>
-        <div class="pt-lg-5 pt-md-4 pt-3 text-center about-two-grids">
-          <div class="about-para-txt">
-            <p>Text</p>
-            <p class="mt-2">Text</p>
+            <img src="{{ url_for('static', filename='images/c4.jpg')}}" alt="news image" class="img-fluid">
           </div>
         </div>
       </div>
@@ -121,10 +115,10 @@
     <!--menu-order-->
     <section class="menu-order py-lg-4 py-md-3 py-sm-3 py-3" id="menu-order">
       <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
-        <h6 class="text-center top-title mb-2">Header</h6>
+        <h6 class="text-center top-title mb-2">Menu</h6>
         <h3 class="text-center title mb-3">Our Menu</h3>
         <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
-          <p>Text</p>
+          <p></p>
         </div>
         <div class="row">
           {% for t in a %}
@@ -155,16 +149,19 @@
           </div>
           {% endfor %}
         </div>
+        <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
+          <p><a href="{{ url_for('menu')}}">Click here to order</a></p>
+        </div>
       </div>
     </section>
     <!--//menu-order -->
     <!-- service -->
     <section class="service py-lg-4 py-md-3 py-sm-3 py-3" id="service">
       <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
-        <h6 class="text-center top-title mb-2">Header</h6>
-        <h3 class="text-center title mb-3">Text</h3>
+        <h6 class="text-center top-title mb-2">Service</h6>
+        <h3 class="text-center title mb-3">Our Service</h3>
         <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
-          <p>text</p>
+          <p></p>
         </div>
         <div class="row">
           <div class="col-lg-4 col-md-6 col-sm-6 service-grid-wthree">
@@ -174,7 +171,7 @@
               </div>
               <div class="ser-sevice-grid">
                 <h4 class="pb-3">Online Order </h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+                <p>Easy to make your order.</p>
               </div>
             </div>
           </div>
@@ -185,7 +182,7 @@
               </div>
               <div class="ser-sevice-grid">
                 <h4 class="pb-3">Home Delivery</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+                <p>Can order from your home and More comfortable.</p>
               </div>
             </div>
           </div>
@@ -196,7 +193,7 @@
               </div>
               <div class="ser-sevice-grid">
                 <h4 class="pb-3">New menu</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+                <p>New Menu Every Seasonal.</p>
               </div>
             </div>
           </div>
@@ -207,7 +204,7 @@
               </div>
               <div class="ser-sevice-grid">
                 <h4 class="pb-3">Fresh Recipe</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+                <p>A recipe has no soul. You, as the cook, must bring soul to the recipe.</p>
               </div>
             </div>
           </div>
@@ -218,7 +215,7 @@
               </div>
               <div class="ser-sevice-grid">
                 <h4 class="pb-3">Quality</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+                <p>Fresh and High Quality every dish</p>
               </div>
             </div>
           </div>
@@ -229,73 +226,20 @@
               </div>
               <div class="ser-sevice-grid">
                 <h4 class="pb-3">Best Price</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna</p>
+                <p>reasonable price</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!--//service -->
-    <!-- prices  -->
-    <section class="price py-lg-4 py-md-3 py-sm-3 py-3" id="price">
-      <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
-        <h6 class="text-center top-title mb-2">Header</h6>
-        <h3 class="text-center title mb-3">Our Service</h3>
-        <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
-          <p>Text</p>
-        </div>
-        <div class="row w3pvt-service-grids-all text-center">
-          <div class="col-lg-4 col-md-4 table-tab-table">
-            <div class="table-wthree-price">
-              <div class="table-sub-title text-center">
-                <h4>Gold</h4>
-                <h5 class="pt-lg-4 pt-md-4 pt-3"><span>$</span>50</h5>
-                <h6 class="pt-3">Per Month</h6>
-                <p class="pt-lg-5 pt-md-4 pt-3"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum</p>
-              </div>
-              <div class="view-buttn text-center pt-lg-4 pt-3">
-                <a href="{{ url_for('contact')}}" class="btn ">Book Here</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 table-tab-table">
-            <div class="table-wthree-price">
-              <div class="table-sub-title text-center">
-                <h4>Platium</h4>
-                <h5 class="pt-lg-4 pt-md-4 pt-3"><span>$</span>60</h5>
-                <h6 class="pt-3">Per Month</h6>
-                <p class="pt-lg-5 pt-md-4 pt-3"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum</p>
-              </div>
-              <div class="view-buttn text-center pt-lg-4 pt-3">
-                <a href="{{ url_for('contact')}}" class="btn ">Book Here</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 table-tab-table">
-            <div class="table-wthree-price">
-              <div class="table-sub-title text-center">
-                <h4>Sliver</h4>
-                <h5 class="pt-lg-4 pt-md-4 pt-3"><span>$</span>70</h5>
-                <h6 class="pt-3">Per Month</h6>
-                <p class="pt-lg-5 pt-md-4 pt-3"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum</p>
-              </div>
-              <div class="view-buttn text-center pt-lg-4 pt-3">
-                <a href="{{ url_for('contact')}}" class="btn ">Book Here</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--//prices -->
     <!-- Clients  -->
     <section class="clients py-lg-4 py-md-3 py-sm-3 py-3" id="clients">
       <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
-        <h6 class="text-center top-title mb-2">Header</h6>
+        <h6 class="text-center top-title mb-2">Quotes</h6>
         <h3 class="text-center title mb-3">Our Clients</h3>
         <div class="title-wls-text text-center pt-lg-3 pt-2 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum </p>
+          <p></p>
         </div>
         <div class="row pt-lg-5 pt-md-4 pt-3">
           <div class="col-lg-4 clients-client">
@@ -304,10 +248,9 @@
                 <span class="fa fa-quote-right" aria-hidden="true"></span>
               </div>
               <div class="clients-info">
-                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet,
+                <p >A man can live and be healthy without killing animals for food; therefore, if he eats meat, he participates in taking animal life merely for the sake of his appetite.
                 </p>
-                <h4 class="pt-2 text-right">Jony Joe</h4>
+                <h4 class="pt-2 text-right">Leo Tolstoy</h4>
               </div>
             </div>
           </div>
@@ -317,10 +260,9 @@
                 <span class="fa fa-quote-right" aria-hidden="true"></span>
               </div>
               <div class="clients-info">
-                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet,
+                <p >Cookery is not chemistry. It is an art. It requires instinct and taste rather than exact measurements.                                                                 
                 </p>
-                <h4 class="pt-2 text-right">Max Joe</h4>
+                <h4 class="pt-2 text-right">Marcel Boulestin</h4>
               </div>
             </div>
           </div>
@@ -330,10 +272,9 @@
                 <span class="fa fa-quote-right" aria-hidden="true"></span>
               </div>
               <div class="clients-info">
-                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet,
+                <p >If you really want to make a friend, go to someone’s house and eat with him… the people who give you their food give you their heart.
                 </p>
-                <h4 class="pt-2 text-right">Kely Joe</h4>
+                <h4 class="pt-2 text-right">Cesar Chavez</h4>
               </div>
             </div>
           </div>
@@ -346,8 +287,8 @@
       <div class="container py-lg-4 py-md-4 py-sm-3 py-3">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
-            <h2><a href="{{ url_for('index')}}">Project 01</a></h2>
-            <p class="pt-lg-4 pt-3">Text
+            <h2><a href="{{ url_for('index')}}">Thai Food Delivery</a></h2>
+            <p class="pt-lg-4 pt-3">Enjoy Your Eating
             </p>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
@@ -390,7 +331,7 @@
       <div class="container pb-lg-3 pb-2">
         <div class="bottem-txt-footer text-center pt-md-4 pt-3">
           <p> 
-            Test form 01
+            Thai Food Delivery
           </p>
         </div>
         <!-- move icon -->
