@@ -55,6 +55,7 @@
               <li class="active"><a href="{{ url_for('index')}}">Home</a></li>
               <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('menu')}}">Menu</a></li>
               <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
+              <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('profile')}}"><i class="fa fa-user" aria-hidden="true"></i></a></li>
               <li><a href="{{ url_for('logout')}}">Logout</a></li>
             </ul>
           </nav>
@@ -106,7 +107,7 @@
             {{ i.qty }}
           </div>
           <form method = 'post'>
-            <input type="text" name="qty" required autofocus>
+            <input type="text" name="qty" placeholder="Quantity" required autofocus>
             <button type="submit" name=Add value="{{ i.product }}">Add</button>
           </form>
           <div class="total-price">{{ i.price }} THB</div>

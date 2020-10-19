@@ -102,6 +102,9 @@ def login() :
                 session['logged_in'] = True
                 session['id'] = account.id
                 session['name'] = account.name
+                session["password"] = account.password
+                session["email"] = account.email
+                session["time"] = 0
                 text = f"Welcome Back {session['name']}"
                 return home(text)
             else :
@@ -170,38 +173,65 @@ def menu() :
     else :
         return redirect(url_for('login'))
 
+@app.route('/profile', methods=["GET", "POST"])
+def profile() :
+    if 'logged_in' in session :
+        if request.method == 'POST' and 'Order_id' in request.form :
+            ID = request.form.get("Order_id")
+            print(ID)
+            db.session.query(Order).filter_by(id=ID).delete()
+            db.session.commit()
+            text = "Cancel Order Success"
+            return home(text)
+        account = {"name" : session["name"], "password" : session["password"], "email" : session["email"]}
+        User_Order = db.session.query(Order).filter_by(name=session['name']).all()
+        id_order = []
+        for i in User_Order :
+            id_order.append(i.id)
+        return render_template("profile.html", account=account, id=id_order)
+    else :
+        return redirect(url_for("login"))
+
 @app.route('/cart', methods=["GET", "POST"])
 def Cart() :
     if 'logged_in' in session :
         Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
         product_name = []
+        try :
+            if session["time"] != 0 :
+                for i in Pre_Order :
+                    if i.product not in product_name and i.time == session['time']  :
+                        value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
+                        product_name.append(value)
+                    if request.method == "POST" :
+                        if session['logged_in'] is True :
+                            if request.form.get("Order") :
+                                return redirect(url_for('total'))
+                            if request.form.get("Remove") :
+                                for i in Pre_Order :
+                                    if i.product == request.form.get("Remove") :
+                                        db.session.query(PreOrder).filter_by(id=i.id).delete()
+                                        db.session.commit()
+                                        return redirect(url_for('Cart'))
+                            if request.form.get("Add") :
+                                for i in Pre_Order :
+                                    if i.product == request.form.get("Add") and i.time == session["time"] :
+                                        if int(request.form.get('qty')) > 0 :
+                                            i.qty = request.form.get('qty')
+                                            db.session.commit()
+                                        else :
+                                            i.qty = 1
+                                            db.session.commit()
+                                return redirect(url_for("Cart"))
+                if len(product_name) == 0 :
+                    text = "Please Should Your Order First"
+                    return home(text)
+            else :
+                text = "Please Should Your Order First"
+                return home(text)
+        except KeyError :
+            return render_template('cart.html',a='')
         
-        for i in Pre_Order :
-            if i.product not in product_name and i.time == session['time']  :
-                value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
-                product_name.append(value)
-        if session["time"] != 0 :
-            print(session['time'])
-            if request.method == "POST" :
-                if session['logged_in'] is True :
-                    if request.form.get("Order") :
-                        return redirect(url_for('total'))
-                    if request.form.get("Remove") :
-                        for i in Pre_Order :
-                            if i.product == request.form.get("Remove") :
-                                db.session.query(PreOrder).filter_by(id=i.id).delete()
-                                db.session.commit()
-                    if request.form.get("Add") :
-                        for i in Pre_Order :
-                            if i.product == request.form.get("Add") and i.time == session["time"] :
-                                if int(request.form.get('qty')) > 0 :
-                                    i.qty = request.form.get('qty')
-                                    print(i.qty)
-                                    db.session.commit()
-                                else :
-                                    i.qty = 1
-                                    db.session.commit()
-            
         return render_template('cart.html', a=product_name)
     else :
         return redirect(url_for("login"))

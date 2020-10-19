@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Civic - CV Resume</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Civic - CV Resume">
+	<meta name="keywords" content="resume, civic, onepage, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->   
+
+	<!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='//fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700')}}" />
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min2.css')}}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.3css')}}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css')}}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.css')}}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css')}}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css')}}" />
+  
+
+  <script>
+        addEventListener("load", function () {
+          setTimeout(hideURLbar, 0);
+        }, false);
+        
+        function hideURLbar() {
+          window.scrollTo(0, 1);
+        }
+      </script>
+    <script src="/store/inc/clientapi/ac-client-api.js"></script>
+    <!--//meta tags ends here-->
+    <!--booststrap-->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all">
+    <!--//booststrap end-->
+    <!-- font-awesome icons -->
+    <link href="{{ url_for('static', filename='css/font-awesome.min1.css')}}" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!--stylesheets-->
+    <link href="{{ url_for('static', filename='css/style1.css')}}" rel='stylesheet' type='text/css' media="all">
+    <!--//stylesheets-->
+    <link href="{{ url_for('static', filename='//fonts.googleapis.com/css?family=Oswald:400,500,600,700')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='//fonts.googleapis.com/css?family=Open+Sans:400,600,700')}}" rel="stylesheet">
+
+
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+  <div class="main-top" id="home">
+    <!-- header -->
+    <div class="headder-top">
+      <!-- nav -->
+      <nav >
+        <div id="logo">
+          <h1><a href="{{ url_for('index')}}">Project 01</a></h1>
+        </div>
+        <label for="drop" class="toggle">Menu</label>
+        <input type="checkbox" id="drop">
+        <ul class="menu mt-2">
+          <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+            <a href="{{ url_for('Cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true" ></i></a>
+          </li>
+          <li class="active"><a href="{{ url_for('index')}}">Home</a></li>
+          <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('menu')}}">Menu</a></li>
+          <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
+          <li class="mx-lg-3 mx-md-2 my-md-0 my-1"><a href="{{ url_for('profile')}}"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+          <li><a href="{{ url_for('logout')}}">Logout</a></li>
+        </ul>
+      </nav>
+      <!-- //nav -->
+    </div>
+    <div class="main-banner">
+      <div class="container-fluid">
+        <div class="style-banner ">
+        <div class="row">
+          <div class="col-xl-10 offset-xl-1">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="hero-text">
+                  <h2>{{ account['name'] }}</h2>
+                </div>
+                <div class="hero-info">
+                  <h2>Info</h2>
+                  <ul>
+                    <li><span>Address</span>Rosia Road 55, Gibraltar, UK</li>
+                    <li><span>E-mail</span>{{ account['email'] }}</li>
+                    <li><span>Phone </span>+43 5266 22 345</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div> 
+      </div>
+    </div>
+  </div>
+
+
+	<!-- Social links section start -->
+	<div class="social-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="social-link-warp">
+						<div class="social-links">
+							<a href=""><i class="fa fa-pinterest"></i></a>
+							<a href=""><i class="fa fa-linkedin"></i></a>
+							<a href=""><i class="fa fa-instagram"></i></a>
+							<a href=""><i class="fa fa-facebook"></i></a>
+							<a href=""><i class="fa fa-twitter"></i></a>
+						</div>
+						<h2 class="hidden-md hidden-sm">Your Order</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<!-- Social links section end -->
+
+	<!-- Resume section start -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-7 offset-xl-2">
+					<div class="section-title">
+						<h2>History</h2>
+					</div>
+					<ul class="resume-list">
+            {% for i in id %}
+						<li>   
+              <h2>Success</h2>
+							<h3>Order ID : {{ i }}</h3>
+              </li>
+              {%endfor%}
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	<section class="contact-section spad">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-8 offset-xl-2">
+					<div class="section-title">
+						<h2>Cancel Order</h2>
+					</div>
+					<form class="contact-form" method="POST">
+						<div class="row">
+							<div class="col-md-6">
+								<input type="text" name="Order_id" placeholder="Order ID" id="Order_id" required autofocus>
+							</div>
+						</div>
+						<div class="text-md-right">
+							<button class="site-btn" name="Submit">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+  </section>
+  <footer class="py-lg-3 py-md-2 py-sm-3 py-2">
+    <div class="container py-lg-4 py-md-4 py-sm-3 py-3">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
+          <h2><a href="{{ url_for('index')}}">Project 01</a></h2>
+          <p class="pt-lg-4 pt-3">Text
+          </p>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
+          <h4>Our Timings</h4>
+          <div class="mt-3 footer-hours-list">
+            <ul>
+              <li class="d-flex">Monday-Friday<span class="time-footer ml-auto"> 9:30-18:30</span></li>
+              <li class="d-flex">Saturday <span class="time-footer ml-auto">10:30-14:30</span></li>
+              <li class="d-flex">Sunday   <span class="time-footer ml-auto">     closed</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
+          <h4>Our Address</h4>
+          <div class="mt-3 footer-top">
+            <p><span>Address</span> :Melbourne St,South <br>Birbane 4101 Austraila.</p>
+            <p class="pt-2"> <span> Phone</span> :+(000) 123 4565 32</p>
+            <p class="pt-2"><span>Email</span>   :<a href="mailto:info@example.com">info@example1.com</a> 
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 footer-bottom-txt">
+          <h4>Social Icons</h4>
+          <div class="social-icons mt-3">
+            <ul>
+              <li><a href="#"><span class="fa fa-facebook mr-lg-3 mr-2"></span></a></li>
+              <li><a href="#"><span class="fa fa-twitter mr-lg-3 mr-2"></span></a></li>
+              <li><a href="#"><span class="fa fa-rss mr-lg-3 mr-2"></span></a></li>
+              <li><a href="#"><span class="fa fa-envelope mr-lg-3 mr-2"></span></a></li>
+              <li><a href="#"><span class="fa fa-instagram mr-lg-3 mr-2"></span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--//footer -->
+  <!-- footer-copy-write -->
+  <div class="footer-copy-write py-lg-3 py-md-2 py-sm-3 py-2">
+    <div class="container pb-lg-3 pb-2">
+      <div class="bottem-txt-footer text-center pt-md-4 pt-3">
+        <p> 
+          Test form 01
+        </p>
+      </div>
+      <!-- move icon -->
+      <div class="text-center">
+        <a href="#home" class="move-top text-center mt-3"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+      </div>
+      <!--//move icon -->
+    </div>
+  </div>
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/magnific-popup.min.js"></script>
+	<script src="js/circle-progress.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
