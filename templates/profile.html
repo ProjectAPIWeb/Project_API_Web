@@ -83,15 +83,15 @@
             <div class="row">
               <div class="col-lg-6">
                 <div class="hero-text">
-                  <h2>{{ account['name'] }}</h2>
+                  <h2>{{ account['name'] }}</h2> <a href="{{ url_for('edit_name')}}">Edit Name</a>
                 </div>
                 <div class="hero-info">
                   <h2>Info</h2>
                   <ul>
-                    <li><span>Address</span>{{ address }}</li>
-                    <li><span>E-mail</span>{{ account['email'] }}</li>
-                    <li><span>Phone </span>{{ account['phone']}}</li>
+                    <li><span>E-mail</span>{{ account['email'] }}</li> <a href="{{ url_for('edit_email')}}">Edit Email</a>
+                    <li><span>Phone </span>{{ account['phone']}}</li> <a href="{{ url_for('edit_phone')}}">Edit Phone</a>
                   </ul>
+                  <a href="{{ url_for('edit_password')}}">Edit Password</a>
                 </div>
               </div>
             </div>
@@ -134,8 +134,16 @@
 					<ul class="resume-list">
             {% for i in id %}
 						<li>   
-              <h2>Success</h2>
-							<h3>Order ID : {{ i }}</h3>
+              <h2>{{ i.Type }}</h2>
+              <h3>Order ID : {{ i.ID }}</h3>
+              <h4></h4>
+              <h4>Date : {{ i.Date }}</h4>
+              <h4>Address : {{ i.Address }}</h4>
+              <h4>Quantity : {{ i.Order }} </h4>
+              <h4>Total : {{ i.Price }}</h4>
+              <form method="POST">
+                <button name="Detail" value="{{i.ID}}">Click Here For More Detail</button>
+              </form>
               </li>
               {%endfor%}
               <h2>{{ text }}</h2>

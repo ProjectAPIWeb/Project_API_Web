@@ -7,7 +7,7 @@
   <!DOCTYPE html>
   <html lang="zxx">
     <head>
-      <title>Thai Food Delivery</title>
+      <title>Test</title>
       <!--meta tags -->
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,7 +68,7 @@
               <a href="{{ url_for('index')}}">Home</a>
               <span>/ /</span>
             </li>
-            <li>Total</li>
+            <li>Detail </li>
           </ul>
         </div>
       </div>
@@ -76,9 +76,11 @@
       
         <!-- Title -->
         <div class="title">
-          Should Your Way
+          Order ID : {{ ID }}
         </div>
        
+        <!-- Product #1 -->
+        {%for i in a%}
         <div class="item"> 
           <div class="buttons">
             <span class="delete-btn"></span>
@@ -86,27 +88,16 @@
           </div>
           
           <div class="description">
-            <span> <a href="{{url_for('New')}}">New Address</a></span>
+            <span>{{ i.name }}</span>
           </div>
           <div class="quantity">
-
+            {{ i.qty }}
           </div>
-          <div class="total-price"></div>
+          <div class="total-price">
+            {{ i.price }} THB
+          </div>
        </div> 
-       <div class="item"> 
-        <div class="buttons">
-          <span class="delete-btn"></span>
-          <span class="like-btn"></span>
-        </div>
-        
-        <div class="description">
-          <span> <a href="{{url_for('Old')}}">Old Address</a></span>
-        </div>
-        <div class="quantity">
-
-        </div>
-        <div class="total-price"></div>
-     </div> 
+      {%endfor%}
       <div class="item"> 
         <div class="buttons">
           <span class="delete-btn"></span>

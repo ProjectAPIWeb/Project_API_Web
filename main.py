@@ -4,6 +4,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import sessionmaker, relationship, backref
 import uuid
 import requests
+from datetime import datetime
 import re
 
 app = Flask(__name__)
@@ -24,20 +25,30 @@ class User(db.Model) :
 class Address(db.Model) :
     __tablename__ = "Address"
     id = Column(String, primary_key=True)
-    name = Column(String)
+    id_user = Column(Integer)
     address = Column(String)
+
+class Contact(db.Model) :
+    __tablename__ = "Contact"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    email = Column(String)
+    phone = Column(String)
+    msg = Column(String)
 
 class Order(db.Model) :
     __tablename__ = 'Order'
     id = Column(String(35), primary_key=True, unique=True)
-    name = Column(String(100))
+    id_user = Column(Integer)
     time = Column(Integer)
     address = Column(String)
+    date = Column(String)
+    Type = Column(Integer)
 
 class PreOrder(db.Model) :
     __tablename__ = 'PreOrder'
     id = Column(String(35), primary_key=True)
-    name_user = Column(String(100))
+    id_user = Column(Integer)
     product = Column(String(100))
     price = Column(Integer)
     qty = Column(Integer)
@@ -46,7 +57,7 @@ class PreOrder(db.Model) :
 @app.route('/index', methods=['GET', 'POST'])
 def index() :
     if 'logged_in' in session :
-        url = "http://api-7720715.th.app.ruk-com.cloud/"
+        url = "http://api-7720715.th.app.ruk-com.cloud/product"
         response = requests.request("GET", url)
         result = response.json()
         a = []
@@ -99,6 +110,36 @@ def register() :
         msg = 'Please fill out the form!'
     return render_template('register.html', msg=msg)
 
+@app.route('/admin', methods=['GET', 'POST'])
+def admin() :
+    if session['logged_in'] == True :
+        if session['name'] == 'Admin' :
+            AO = db.session.query(Order).all()
+            L = []
+            for i in AO :
+                if i.Type < 4 :
+                    V = {"ID" : i.id, "Type" : i.Type}
+                    L.append(V)
+            if request.method == 'POST' :
+                if request.form.get("Type") : 
+                    print(request.form.get('ID'))
+                    O = db.session.query(Order).filter_by(id=request.form.get('ID')).first()
+                    if 5 > int(request.form.get("Type")) > 0 :
+                        O.Type = int(request.form.get("Type"))
+                        db.session.commit()
+                        return redirect(url_for('admin'))
+                    else :
+                        msg = "Error Input"
+                        return render_template('admin.html', L=L, msg=msg)
+            msg = ''
+            return render_template('admin.html', L=L)
+
+        else :
+            text = "Staff Only"
+            return home(text)
+    else :
+        return redirect(url_for('login'))
+
 @app.route('/', methods=['GET', 'POST'])
 def login() : 
     msg = ''
@@ -114,8 +155,8 @@ def login() :
                 session["password"] = account.password
                 session["email"] = account.email
                 session["phone"] = account.phone
-                Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
-                Order_Time = db.session.query(Order).filter_by(name=session['name']).all()
+                Pre_Order = db.session.query(PreOrder).filter_by(id_user=session['id']).all()
+                Order_Time = db.session.query(Order).filter_by(id_user=session['id']).all()
                 P = []
                 T = []
                 for i in Pre_Order :
@@ -144,6 +185,12 @@ def login() :
 @app.route('/contact', methods=['GET', 'POST'])
 def contact() :
     if 'logged_in' in session :
+        if request.method == "POST" and "First" in request.form and "Last" in request.form and "Email" in request.form and "Phone" in request.form and "msg" in request.form :
+            id = len(Contact.query.all()) + 1
+            comment = Contact(id=id, name=request.form.get('First') + request.form.get('Last'), email=request.form.get('Email'), phone=request.form.get("Phone"), msg=request.form.get("msg"))
+            db.session.add(comment)
+            db.session.commit()
+
         return render_template('contact.html')
     else :
         return redirect(url_for("login"))
@@ -151,7 +198,7 @@ def contact() :
 @app.route('/menu', methods=['GET', 'POST'])
 def menu() :
     if 'logged_in' in session :
-        url = "http://api-5496804.th.app.ruk-com.cloud/product"
+        url = "http://api-7720715.th.app.ruk-com.cloud/product"
         response = requests.request("GET", url)
         result = response.json()
         a = []
@@ -168,10 +215,9 @@ def menu() :
             if session['logged_in'] is True :
                 if request.form.get("cart") :
                     id = uuid.uuid4().hex
-                    name_user = session['name']
                     product = str(request.form.get("cart")).split(',')
-                    Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
-                    Order_Time = db.session.query(Order).filter_by(name=session['name']).all()
+                    Pre_Order = db.session.query(PreOrder).filter_by(id_user=session['id']).all()
+                    Order_Time = db.session.query(Order).filter_by(id_user=session['id']).all()
                     P = []
                     T = []
                     O = []
@@ -192,7 +238,7 @@ def menu() :
                         if i.time == session['time'] :
                             P.append(i.product)
                     if product[0] not in P :
-                        pre_order = PreOrder(id=id, name_user=name_user, product=product[0], price=float(product[1]),qty=1,time=session['time'])
+                        pre_order = PreOrder(id=id, id_user=session['id'], product=product[0], price=float(product[1]),qty=1,time=session['time'])
                         db.session.add(pre_order)
                         db.session.commit()
                     else :
@@ -208,49 +254,133 @@ def menu() :
     else :
         return redirect(url_for('login'))
 
+@app.route('/detail', methods=['GET', "POST"])
+def detail(ID) :
+    Order_User = db.session.query(Order).filter_by(id=ID).first()
+    Pre_Order = db.session.query(PreOrder).filter_by(time=Order_User.time).all()
+    product = []
+    for i in Pre_Order :
+        value = {'name' : i.product, 'qty' : i.qty, 'price' : i.price}
+        product.append(value)
+    print(product)
+    return render_template('detail.html', a=product, ID=ID)
+
+@app.route('/edit_name', methods=["GET", "POST"])
+def edit_name() :
+    msg = ''
+    if request.method == 'POST' and 'username' in request.form:
+        username = request.form.get('username')
+        account = db.session.query(User).filter_by(name=username).first()
+        if account is not None:
+            msg = 'This name is use already'
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            msg = 'Username must contain only characters and numbers!'
+        else : 
+            df = db.session.query(User).filter_by(id=session['id']).first()
+            session['name'] = username
+            df.name = username
+            db.session.commit()
+            return redirect(url_for('profile'))
+    return render_template('edit_name.html',msg=msg)
+
+@app.route('/edit_email', methods=["GET", "POST"])
+def edit_email() :
+    msg = ''
+    if request.method == 'POST' and 'email' in request.form:
+        email = request.form.get('email')
+        if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address!'
+        else : 
+            df = db.session.query(User).filter_by(id=session['id']).first()
+            session['email'] = email
+            df.email = email
+            db.session.commit()
+            return redirect(url_for('profile'))
+    return render_template('edit_email.html',msg=msg)
+
+@app.route('/edit_phone', methods=["GET", "POST"])
+def edit_phone() :
+    msg = ''
+    if request.method == 'POST' and 'phone' in request.form:
+        phone= request.form.get('phone')
+        if not re.match(r'[0-9]+', phone) :
+            msg = 'Phone number must only number'
+        else : 
+            df = db.session.query(User).filter_by(id=session['id']).first()
+            session['phone'] = phone
+            df.phone = phone
+            db.session.commit()
+            return redirect(url_for('profile'))
+    return render_template('edit_phone.html',msg=msg)
+
+@app.route('/edit_password', methods=["GET", "POST"])
+def edit_password() :
+    msg = ''
+    if request.method == 'POST' and 'newpassword' in request.form and 'oldpassword'in request.form and 'confirmpassword' in request.form :
+        new = request.form.get('newpassword')
+        confirm = request.form.get('confirmpassword')
+        old = request.form.get('oldpassword')
+        if new != confirm :
+            msg = 'Password Not Match'
+        else : 
+            df = db.session.query(User).filter_by(id=session['id']).first()
+            if old == df.password :
+                session['password'] = new
+                df.password = new
+                db.session.commit()
+                return redirect(url_for('profile'))
+            else :
+                msg = 'Old Password Not Correct'
+    return render_template('edit_password.html', msg=msg)
+
 @app.route('/profile', methods=["GET", "POST"])
 def profile() :
     if 'logged_in' in session :
         ID = request.form.get("Order_id")
         Time = db.session.query(Order).filter_by(id=ID).first()
-        User_Address = db.session.query(Address).filter_by(name=session['name']).first()
-        if request.method == 'POST' and 'Order_id' in request.form :
-            db.session.query(PreOrder).filter_by(name_user=session['name'], time=Time.time).delete()
-            db.session.query(Order).filter_by(id=ID).delete()
-            db.session.commit()
-            text = "Cancel Order Success"
-            return home(text)
-        if User_Address is None or User_Address.address is None :
-            address = 'Not have Address'
-            account = {"name" : session["name"], "password" : session["password"], "email" : session["email"], 'phone' : session['phone']}
-            User_Order = db.session.query(Order).filter_by(name=session['name']).all()
-            id_order = []
-            for i in User_Order :
-                id_order.append(i.id)
-            if id_order == [] :
-                text = 'No Order'
-                return render_template("profile.html", account=account, id=id_order, text=text, address=address)
-            else :
-                return render_template("profile.html", account=account, id=id_order, text='', address=address)
-        if User_Address.address != None :
-            text = ''
-            account = {"name" : session["name"], "password" : session["password"], "email" : session["email"], 'phone' : session['phone']}
-            User_Order = db.session.query(Order).filter_by(name=session['name']).all()
-            id_order = []
-            for i in User_Order :
-                id_order.append(i.id)
-            if id_order == [] :
-                text = 'No Order'
-                return render_template("profile.html", account=account, id=id_order, text=text, address=User_Address.address)
-            else :
-                return render_template("profile.html", account=account, id=id_order, text='', address=User_Address.address)
+        if request.method == "POST" : 
+            if 'Order_id' in request.form :
+                db.session.query(PreOrder).filter_by(id_user=session['id'], time=Time.time).delete()
+                db.session.query(Order).filter_by(id=ID).delete()
+                db.session.commit()
+                text = "Cancel Order Success"
+                return home(text)
+            if request.form.get("Detail") :
+                return detail(request.form.get("Detail")) 
+        account = {"name" : session["name"], "password" : session["password"], "email" : session["email"], 'phone' : session['phone']}
+        User_Order = db.session.query(Order).filter_by(id_user=session['id']).all()
+        User_Order_Name = db.session.query(PreOrder).filter_by(id_user=session['id']).all()
+        id_order = []
+        for i in User_Order :
+            User_Order_Name = db.session.query(PreOrder).filter_by(id_user=session['id'], time=i.time).all()
+            num = 0
+            p = 0
+            for j in User_Order_Name : 
+                if j.time == i.time :
+                    num += j.qty
+                    p += j.price
+            if i.Type == 1 :
+                Type = "In Queue"
+            elif i.Type == 2 :
+                Type = "On Cooking"
+            elif i.Type == 3 :
+                Type = "On Delivery"
+            elif i.Type == 4 :
+                Type = "Success"
+            value = {"ID" : i.id, "Address" : i.address, "Order" : num, 'Price' : p , "Date" : i.date, "Type" : Type}
+            id_order.append(value)
+        if id_order == [] :
+            text = 'No Order'
+            return render_template("profile.html", account=account, id=id_order, text=text)
+        else :
+            return render_template("profile.html", account=account, id=id_order, text='')
     else :
         return redirect(url_for("login"))
 
 @app.route('/cart', methods=["GET", "POST"])
 def Cart() :
     if 'logged_in' in session :
-        Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
+        Pre_Order = db.session.query(PreOrder).filter_by(id_user=session['id']).all()
         P = [] 
         product_name = []
         for i in Pre_Order :
@@ -266,7 +396,7 @@ def Cart() :
                 if request.method == "POST" :
                     if session['logged_in'] is True :
                         if request.form.get("Order") :
-                            return redirect(url_for('total'))
+                            return redirect(url_for('New'))
                         if request.form.get("Remove") :
                             for i in Pre_Order :
                                 if i.product == request.form.get("Remove") :
@@ -287,49 +417,11 @@ def Cart() :
         return render_template('cart.html', a=product_name)
     else :
         return redirect(url_for("login"))
-@app.route('/total', methods=['GET', 'POST'])
-def total() :
-    if 'logged_in' in session :
-        Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
-        User_Address = db.session.query(Address).filter_by(name=session['name']).all()
-        UA = []
-        product_name = []
-        price = 0
-        Cart = 0
-        for i in Pre_Order:
-            if i.product not in product_name  and i.time == session['time'] :
-                print(i.product)
-                value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
-                product_name.append(value)
-                price += (i.price * i.qty)
-                Cart += i.qty
-        for i in User_Address :
-            UA.append(i.address)
-        if UA == [] :
-            if request.method == "POST" :
-                if request.form.get("Order") :
-                    ad = request.form.get('address') + ',' + request.form.get('city')
-                    New_Address = Address(id=uuid.uuid4().hex, name=session["name"], address=ad)
-                    text = "Thank for your order"
-                    Order_Total = Order(id=uuid.uuid4().hex, name=session["name"],time=session['time'], address=ad)
-                    session["time"] = None
-                    db.session.add(Order_Total)
-                    db.session.add(New_Address)
-                    db.session.commit()
-                    return home(text)
-
-            return render_template('total1.html', a=product_name, b=price, c=Cart)
-        else :
-            return render_template('total3.html')
-    else :
-        return redirect(url_for('login'))
 
 @app.route('/New', methods=['GET', 'POST'])
 def New() :
     if 'logged_in' in session :
-        Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
-        User_Address = db.session.query(Address).filter_by(name=session['name']).all()
-        UA = []
+        Pre_Order = db.session.query(PreOrder).filter_by(id_user=session['id']).all()
         product_name = []
         price = 0
         Cart = 0
@@ -339,58 +431,25 @@ def New() :
                 value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
                 product_name.append(value)
                 price += (i.price * i.qty)
+                i.price = i.price * i.qty
                 Cart += i.qty
         if request.method == "POST" :
             if request.form.get("Order") :
                 ad = request.form.get('address') + ',' + request.form.get('city')
-                New_Address = Address(id=uuid.uuid4().hex, name=session["name"], address=ad)
+                New_Address = Address(id=uuid.uuid4().hex, id_user=session["id"], address=ad)
                 text = "Thank for your order"
-                Order_Total = Order(id=uuid.uuid4().hex, name=session["name"],time=session['time'], address=ad)
+                date = datetime.now()
+                Date = str(date.date()) + ' ' + date.strftime("%X")
+                Order_Total = Order(id=uuid.uuid4().hex, id_user=session["id"],time=session['time'], address=ad ,date=Date, Type=1)
                 session["time"] = None
                 db.session.add(Order_Total)
                 db.session.add(New_Address)
                 db.session.commit()
                 return home(text)
 
-            return render_template('total1.html', a=product_name, b=price, c=Cart)
+        return render_template('New.html', a=product_name, b=price, c=Cart)
     else :
         return redirect(url_for('login'))
-
-@app.route('/Old', methods=['GET', 'POST'])
-def Old() :
-    if 'logged_in' in session :
-        Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
-        User_Address = db.session.query(Address).filter_by(name=session['name']).all()
-        UA = []
-        product_name = []
-        price = 0
-        Cart = 0
-        for i in Pre_Order:
-            if i.product not in product_name  and i.time == session['time'] :
-                print(i.product)
-                value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
-                product_name.append(value)
-                price += (i.price * i.qty)
-                Cart += i.qty
-        if request.method == "POST" :
-            if request.form.get("Order") :
-                ad = request.form.get('address') + ',' + request.form.get('city')
-                New_Address = Address(id=uuid.uuid4().hex, name=session["name"], address=ad)
-                text = "Thank for your order"
-                Order_Total = Order(id=uuid.uuid4().hex, name=session["name"],time=session['time'], address=ad)
-                session["time"] = None
-                db.session.add(Order_Total)
-                db.session.add(New_Address)
-                db.session.commit()
-                return home(text)
-                
-            return render_template('total2.html', a=product_name, b=price, c=Cart)
-    else :
-        return redirect(url_for('login'))
-
-@app.route('/total3')
-def should() :
-    return render_template('total3.html')
 
 @app.route('/logout')
 def logout():
