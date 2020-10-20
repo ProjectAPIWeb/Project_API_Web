@@ -88,9 +88,9 @@
                 <div class="hero-info">
                   <h2>Info</h2>
                   <ul>
-                    <li><span>Address</span>Rosia Road 55, Gibraltar, UK</li>
+                    <li><span>Address</span>{{ address }}</li>
                     <li><span>E-mail</span>{{ account['email'] }}</li>
-                    <li><span>Phone </span>+43 5266 22 345</li>
+                    <li><span>Phone </span>{{ account['phone']}}</li>
                   </ul>
                 </div>
               </div>
@@ -138,7 +138,8 @@
 							<h3>Order ID : {{ i }}</h3>
               </li>
               {%endfor%}
-					</ul>
+              <h2>{{ text }}</h2>
+          </ul>
 				</div>
 			</div>
 		</div>

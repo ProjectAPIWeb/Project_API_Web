@@ -8,7 +8,7 @@ import re
 
 app = Flask(__name__)
 app.secret_key = 'Mac126218'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://webadmin:ECZcnl63136@node4707-env-0491803.th.app.ruk-com.cloud:11031/WebDatabase'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Mac126218@127.0.0.1:5432/WebDatabase'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -18,13 +18,21 @@ class User(db.Model) :
     id = Column(Integer, primary_key=True)
     name = Column(String)
     email = Column(String)
+    phone = Column(String)
     password = Column(String)
+
+class Address(db.Model) :
+    __tablename__ = "Address"
+    id = Column(String, primary_key=True)
+    name = Column(String)
+    address = Column(String)
 
 class Order(db.Model) :
     __tablename__ = 'Order'
     id = Column(String(35), primary_key=True, unique=True)
     name = Column(String(100))
     time = Column(Integer)
+    address = Column(String)
 
 class PreOrder(db.Model) :
     __tablename__ = 'PreOrder'
@@ -38,7 +46,7 @@ class PreOrder(db.Model) :
 @app.route('/index', methods=['GET', 'POST'])
 def index() :
     if 'logged_in' in session :
-        url = "http://api-5496804.th.app.ruk-com.cloud/product"
+        url = "http://127.0.0.2:5000/"
         response = requests.request("GET", url)
         result = response.json()
         a = []
@@ -70,7 +78,8 @@ def register() :
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-        account = User(id=id, name=username, email=email, password=password)
+        phone = request.form['tel']
+        account = User(id=id, name=username, email=email, password=password, phone=phone)
         Check = db.session.query(User).filter_by(name=username).first()
         if Check is not None:
             msg = 'Account already exists!'
@@ -78,6 +87,8 @@ def register() :
             msg = 'Invalid email address!'
         elif not re.match(r'[A-Za-z0-9]+', username):
             msg = 'Username must contain only characters and numbers!'
+        elif not re.match(r'[0-9]+', phone) :
+            msg = 'Phone number must only number'
         elif not username or not password or not email:
             msg = 'Please fill out the form!'
         else:
@@ -94,9 +105,7 @@ def login() :
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form :
         name = request.form['username']
         password = request.form['password']
-
         account = db.session.query(User).filter_by(name=name).first()
-
         if account :
             if name == account.name and password == account.password :
                 session['logged_in'] = True
@@ -104,6 +113,7 @@ def login() :
                 session['name'] = account.name
                 session["password"] = account.password
                 session["email"] = account.email
+                session["phone"] = account.phone
                 Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
                 Order_Time = db.session.query(Order).filter_by(name=session['name']).all()
                 P = []
@@ -201,19 +211,39 @@ def menu() :
 @app.route('/profile', methods=["GET", "POST"])
 def profile() :
     if 'logged_in' in session :
+        ID = request.form.get("Order_id")
+        Time = db.session.query(Order).filter_by(id=ID).first()
+        User_Address = db.session.query(Address).filter_by(name=session['name']).first()
         if request.method == 'POST' and 'Order_id' in request.form :
-            ID = request.form.get("Order_id")
-            print(ID)
+            db.session.query(PreOrder).filter_by(name_user=session['name'], time=Time.time).delete()
             db.session.query(Order).filter_by(id=ID).delete()
             db.session.commit()
             text = "Cancel Order Success"
             return home(text)
-        account = {"name" : session["name"], "password" : session["password"], "email" : session["email"]}
-        User_Order = db.session.query(Order).filter_by(name=session['name']).all()
-        id_order = []
-        for i in User_Order :
-            id_order.append(i.id)
-        return render_template("profile.html", account=account, id=id_order)
+        if User_Address is None or User_Address.address is None :
+            address = 'Not have Address'
+            account = {"name" : session["name"], "password" : session["password"], "email" : session["email"], 'phone' : session['phone']}
+            User_Order = db.session.query(Order).filter_by(name=session['name']).all()
+            id_order = []
+            for i in User_Order :
+                id_order.append(i.id)
+            if id_order == [] :
+                text = 'No Order'
+                return render_template("profile.html", account=account, id=id_order, text=text, address=address)
+            else :
+                return render_template("profile.html", account=account, id=id_order, text='', address=address)
+        if User_Address.address != None :
+            text = ''
+            account = {"name" : session["name"], "password" : session["password"], "email" : session["email"], 'phone' : session['phone']}
+            User_Order = db.session.query(Order).filter_by(name=session['name']).all()
+            id_order = []
+            for i in User_Order :
+                id_order.append(i.id)
+            if id_order == [] :
+                text = 'No Order'
+                return render_template("profile.html", account=account, id=id_order, text=text, address=User_Address.address)
+            else :
+                return render_template("profile.html", account=account, id=id_order, text='', address=User_Address.address)
     else :
         return redirect(url_for("login"))
 
@@ -261,6 +291,45 @@ def Cart() :
 def total() :
     if 'logged_in' in session :
         Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
+        User_Address = db.session.query(Address).filter_by(name=session['name']).all()
+        UA = []
+        product_name = []
+        price = 0
+        Cart = 0
+        for i in Pre_Order:
+            if i.product not in product_name  and i.time == session['time'] :
+                print(i.product)
+                value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
+                product_name.append(value)
+                price += (i.price * i.qty)
+                Cart += i.qty
+        for i in User_Address :
+            UA.append(i.address)
+        if UA == [] :
+            if request.method == "POST" :
+                if request.form.get("Order") :
+                    ad = request.form.get('address') + ',' + request.form.get('city')
+                    New_Address = Address(id=uuid.uuid4().hex, name=session["name"], address=ad)
+                    text = "Thank for your order"
+                    Order_Total = Order(id=uuid.uuid4().hex, name=session["name"],time=session['time'], address=ad)
+                    session["time"] = None
+                    db.session.add(Order_Total)
+                    db.session.add(New_Address)
+                    db.session.commit()
+                    return home(text)
+
+            return render_template('total1.html', a=product_name, b=price, c=Cart)
+        else :
+            return render_template('total3.html')
+    else :
+        return redirect(url_for('login'))
+
+@app.route('/New', methods=['GET', 'POST'])
+def New() :
+    if 'logged_in' in session :
+        Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
+        User_Address = db.session.query(Address).filter_by(name=session['name']).all()
+        UA = []
         product_name = []
         price = 0
         Cart = 0
@@ -273,17 +342,55 @@ def total() :
                 Cart += i.qty
         if request.method == "POST" :
             if request.form.get("Order") :
+                ad = request.form.get('address') + ',' + request.form.get('city')
+                New_Address = Address(id=uuid.uuid4().hex, name=session["name"], address=ad)
                 text = "Thank for your order"
-                Order_Total = Order(id=uuid.uuid4().hex, name=session["name"],time=session['time'])
+                Order_Total = Order(id=uuid.uuid4().hex, name=session["name"],time=session['time'], address=ad)
                 session["time"] = None
                 db.session.add(Order_Total)
+                db.session.add(New_Address)
                 db.session.commit()
                 return home(text)
-            
 
-        return render_template('total.html', a=product_name, b=price, c=Cart)
+            return render_template('total1.html', a=product_name, b=price, c=Cart)
     else :
         return redirect(url_for('login'))
+
+@app.route('/Old', methods=['GET', 'POST'])
+def Old() :
+    if 'logged_in' in session :
+        Pre_Order = db.session.query(PreOrder).filter_by(name_user=session['name']).all()
+        User_Address = db.session.query(Address).filter_by(name=session['name']).all()
+        UA = []
+        product_name = []
+        price = 0
+        Cart = 0
+        for i in Pre_Order:
+            if i.product not in product_name  and i.time == session['time'] :
+                print(i.product)
+                value = {"product" : i.product, "price" : i.price, "qty" : i.qty}
+                product_name.append(value)
+                price += (i.price * i.qty)
+                Cart += i.qty
+        if request.method == "POST" :
+            if request.form.get("Order") :
+                ad = request.form.get('address') + ',' + request.form.get('city')
+                New_Address = Address(id=uuid.uuid4().hex, name=session["name"], address=ad)
+                text = "Thank for your order"
+                Order_Total = Order(id=uuid.uuid4().hex, name=session["name"],time=session['time'], address=ad)
+                session["time"] = None
+                db.session.add(Order_Total)
+                db.session.add(New_Address)
+                db.session.commit()
+                return home(text)
+                
+            return render_template('total2.html', a=product_name, b=price, c=Cart)
+    else :
+        return redirect(url_for('login'))
+
+@app.route('/total3')
+def should() :
+    return render_template('total3.html')
 
 @app.route('/logout')
 def logout():

@@ -6,7 +6,7 @@ Author URL: http://w3layouts.com
 <html lang="zxx">
 
 <head>
-	<title>Register</title>
+	<title>Edit</title>
 
 	<!-- Meta tags -->
 	<meta charset="UTF-8">
@@ -31,11 +31,11 @@ Author URL: http://w3layouts.com
 		<div class="overlay">
 			<div class="wrapper">
 				<div class="logo">
-					<a class="brand-logo" href="{{ url_for('index')}}">Sign up</a>
+					<a class="brand-logo" href="{{ url_for('index')}}">Edit</a>
 				</div>
 				<div class="form-section">
 					<h3>Register</h3>
-					<form action="{{ url_for('register')}}" method="post" class="signup-form">
+					<form action="{{ url_for('register')}}" method="post" class="signin-form">
 						<div class="form-input">
 							<input type="text" name="username" placeholder="username" id="username" required autofocus>
 						</div>
@@ -43,10 +43,7 @@ Author URL: http://w3layouts.com
 							<input type="email" name="email" placeholder="Email" id="email" required autofocus>
 						</div>
 						<div class="form-input">
-							<input type="text" name="tel" placeholder="tel" id="tel" required autofocus>
-						</div>
-						<div class="form-input">
-							<input type="password" name="password" placeholder="Password" id="password" required autofocus>
+							<input type="password" name="password" placeholder="Password" id="password" required>
 						</div>
 						<div class="msg">{{ msg }}</div>
 						<button type="submit" class="btn btn-primary theme-button mt-4">Sign Up</button>
