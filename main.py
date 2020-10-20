@@ -8,7 +8,7 @@ import re
 
 app = Flask(__name__)
 app.secret_key = 'Mac126218'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Mac126218@127.0.0.1:5432/WebDatabase'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://webadmin:IKVtfl61980@node4912-env-3420079.th.app.ruk-com.cloud:11041/WebDatabase'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -46,7 +46,7 @@ class PreOrder(db.Model) :
 @app.route('/index', methods=['GET', 'POST'])
 def index() :
     if 'logged_in' in session :
-        url = "http://127.0.0.2:5000/"
+        url = "http://api-7720715.th.app.ruk-com.cloud/"
         response = requests.request("GET", url)
         result = response.json()
         a = []
