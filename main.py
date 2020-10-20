@@ -283,19 +283,15 @@ def menu() :
 
 @app.route('/detail', methods=['GET', "POST"])
 def detail(ID) :
-    if 'logged_in' == True : # ตรวจสอบว่า login หรือยัง
-
 # ดึงค่า detail order จาก table เพื่อนำมาแสดง
+    Order_User = db.session.query(Order).filter_by(id=ID).first()
+    Pre_Order = db.session.query(PreOrder).filter_by(time=Order_User.time).all()
+    product = []
+    for i in Pre_Order :
+        value = {'name' : i.product, 'qty' : i.qty, 'price' : i.price}
+        product.append(value)
+    return render_template('detail.html', a=product, ID=ID) # Run html file
 
-        Order_User = db.session.query(Order).filter_by(id=ID).first()
-        Pre_Order = db.session.query(PreOrder).filter_by(time=Order_User.time).all()
-        product = []
-        for i in Pre_Order :
-            value = {'name' : i.product, 'qty' : i.qty, 'price' : i.price}
-            product.append(value)
-        return render_template('detail.html', a=product, ID=ID) # Run html file
-    else :
-        return redirect(url_for('login')) # เรียกฟังชัน login
 
 # หน้าเปลี่ยน ชื่อ
 
