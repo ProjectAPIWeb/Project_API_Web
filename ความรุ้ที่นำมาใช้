@@ -1,0 +1,22 @@
+Import : ใช้ในการนำค่าจาก libert ต่างๆ
+
+If else : ใช้ในการตรวจสอบ และ สร้างขอบเขตต่าง
+
+for : ใช้ในการหาค่าใน list
+
+list : ใช้ในการเก็บข้อมูลในระยะสั้น
+
+dic : ใช้ในการเอาค่าไปใช้ใน html
+
+funtion : ใช้ในการจัดการทำงานให้เป็นระบบ
+
+class : ใช้ในการสร้าง model table
+
+flask-marshmallow : ใช้ในการสร้าง API
+
+flask ทั้งหมด
+    - เชื่อมต่อ database
+    - ดึงข้อมูลจาก database
+    - add ค่าเข้า table
+    - delete ค่าใน table
+    - update ค่าใน table
