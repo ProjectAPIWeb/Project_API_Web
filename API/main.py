@@ -4,13 +4,14 @@ from flask_marshmallow import Marshmallow
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Mac126218@127.0.0.1:5432/Food'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://webadmin:IKVtfl61980@http://env-3420079.th.app.ruk-com.cloud:5432/Food'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
 class Product(db.Model) :
+    __tablename__ = "Product"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True)
     price = db.Column(db.Float)
@@ -75,4 +76,4 @@ def delete_product(id) :
 
 if __name__ == "__main__" :
     app.debug = True
-    app.run(host="127.0.0.2")
+    app.run(host="0.0.0.0",port=80)
