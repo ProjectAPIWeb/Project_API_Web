@@ -120,7 +120,7 @@ def register() :
         else:
             db.session.add(account)                         # Add ข้อมูลเข้า Table
             db.session.commit()
-            msg = 'You have successfully registered!'
+            return redirect(url_for('login'))
     elif request.method == 'POST':  
         msg = 'Please fill out the form!'
     return render_template('register.html', msg=msg)  # Run html file
@@ -384,7 +384,7 @@ def profile() :
         Time = db.session.query(Order).filter_by(id=ID).first()
         if request.method == "POST" :   # ตรวจสอบค่าที่ได้รับมา
             if 'Order_id' in request.form :
-                if Time.time == 1 : # Cancel Order
+                if Time.Type == 1 : # Cancel Order
                     db.session.query(PreOrder).filter_by(id_user=session['id'], time=Time.time).delete()
                     db.session.query(Order).filter_by(id=ID).delete()
                     db.session.commit() 
