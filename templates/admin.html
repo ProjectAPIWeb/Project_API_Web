@@ -75,12 +75,6 @@
       </nav>
       <!-- //nav -->
     </div>
-    <div class="main-banner">
-      <div class="container-fluid">
-        <div class="style-banner ">
-    </div> 
-      </div>
-    </div>
   </div>
 
 
@@ -117,8 +111,9 @@
 						<li>   
               <h2>{{ i.Type }}</h2>
               <h3>Order ID : {{ i.ID}}</h3>
-              <h4>Name : {{i.Name}}</h4>
+              <h4></h4>
               <h4>Date : {{ i.Date }}</h4>
+              <h4>Name : {{i.Name}}</h4>
               <form method="POST">
                 <input type="hidden" name='ID' value="{{i.ID}}">
                 <input type="text" name="Type" >
