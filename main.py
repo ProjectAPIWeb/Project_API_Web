@@ -131,6 +131,7 @@ def admin() :
         if session['name'] == 'Admin' :   # เช็คคนที่เข้าใช้ page staff
             U = db.session.query(User).all()
             Username = []
+            Value = []
             for i in U :
                 for j in db.session.query(Order).filter_by(id_user=i.id).all() :
                     if j.Type < 4 :
