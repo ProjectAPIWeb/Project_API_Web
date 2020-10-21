@@ -28,12 +28,6 @@ class User(db.Model) :
     phone = Column(String)
     password = Column(String)
 
-class Address(db.Model) :
-    __tablename__ = "Address"
-    id = Column(String, primary_key=True)
-    id_user = Column(Integer)
-    address = Column(String)
-
 class Contact(db.Model) :
     __tablename__ = "Contact"
     id = Column(Integer, primary_key=True)
@@ -494,14 +488,12 @@ def New() :
         if request.method == "POST" : # ตรวจสอบค่าที่ได้รับมา
             if request.form.get("Order") :
                 ad = request.form.get('address') + ',' + request.form.get('city')
-                New_Address = Address(id=uuid.uuid4().hex, id_user=session["id"], address=ad)
                 text = "Thank for your order"
                 date = datetime.now()
                 Date = str(date.date()) + ' ' + date.strftime("%X")
                 Order_Total = Order(id=uuid.uuid4().hex, id_user=session["id"],time=session['time'], address=ad ,date=Date, Type=1)
                 session["time"] = None
                 db.session.add(Order_Total) # Add Order ลง ใน table
-                db.session.add(New_Address)
                 db.session.commit()
                 return home(text) # เรียกฟังชัน home
 
