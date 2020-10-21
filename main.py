@@ -142,6 +142,7 @@ def admin() :
                     if j.Type == 3 :
                         Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : "On Delivery"}
                         Username.append(Value)
+                print(Username)
             if request.method == 'POST' : # ตรวจสอบค่าที่ได้รับมา
                 if request.form.get("Type") : 
                     O = db.session.query(Order).filter_by(id=request.form.get('ID')).first()
