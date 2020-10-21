@@ -143,7 +143,7 @@ def admin() :
                         elif j.Type == 3 :
                             Type = "On Delivery"
                             Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : Type}
-                    Username.append(Value)
+                        Username.append(Value)
             if request.method == 'POST' : # ตรวจสอบค่าที่ได้รับมา
                 if request.form.get("Type") : 
                     O = db.session.query(Order).filter_by(id=request.form.get('ID')).first()
