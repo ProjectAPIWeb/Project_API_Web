@@ -136,12 +136,12 @@ def admin() :
             for i in U :
                 Value = {"ID" : i.id, 'name' : i.name}
                 for j in db.session.query(Order).filter_by(id_user=i.id).all() :
-                    if i.Type < 4 :
-                        if i.Type == 1 :
+                    if j.Type < 4 :
+                        if j.Type == 1 :
                             Type = "In Queue"
-                        elif i.Type == 2 :
+                        elif j.Type == 2 :
                             Type = "On Cooking"
-                        elif i.Type == 3 :
+                        elif j.Type == 3 :
                             Type = "On Delivery"
                         Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : Type}
                         Username.append(Value)
