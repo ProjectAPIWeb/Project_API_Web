@@ -131,7 +131,6 @@ def admin() :
         if session['name'] == 'Admin' :   # เช็คคนที่เข้าใช้ page staff
             U = db.session.query(User).all()
             Username = []
-            Value = []
             for i in U :
                 for j in db.session.query(Order).filter_by(id_user=i.id).all() :
                     if j.Type < 4 :
@@ -156,9 +155,9 @@ def admin() :
                 if request.form.get("Search") :
                     return detail(request.form.get("Search")) 
             if Value == [] :
-                return render_template('admin.html', L=Value, msg="No Order Now") # Run html file
+                return render_template('admin.html', L=Username, msg="No Order Now") # Run html file
             msg = ''
-            return render_template('admin.html', L=Value) # Run html file
+            return render_template('admin.html', L=Username) # Run html file
 
         else :
             text = "Staff Only"
