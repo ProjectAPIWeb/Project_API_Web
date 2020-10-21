@@ -134,13 +134,13 @@ def admin() :
             for i in U :
                 for j in db.session.query(Order).filter_by(id_user=i.id).all() :
                     if j.Type == 1 :
-                        Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : "In Queue"}
+                        Value = {'Name' : i.name, "ID_Order" : j.id, "Date": j.date, "Type" : "In Queue"}
                         Username.append(Value)
                     if j.Type == 2 :
-                        Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : "On Cooking"}
+                        Value = {'Name' : i.name, "ID_Order" : j.id, "Date": j.date, "Type" : "On Cooking"}
                         Username.append(Value)
                     if j.Type == 3 :
-                        Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : "On Delivery"}
+                        Value = {'Name' : i.name, "ID_Order" : j.id, "Date": j.date, "Type" : "On Delivery"}
                         Username.append(Value)
                 print(Username)
             if request.method == 'POST' : # ตรวจสอบค่าที่ได้รับมา
