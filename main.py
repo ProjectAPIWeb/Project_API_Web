@@ -134,7 +134,6 @@ def admin() :
             U = db.session.query(User).all()
             Username = []
             for i in U :
-                Value = {"ID" : i.id, 'name' : i.name}
                 for j in db.session.query(Order).filter_by(id_user=i.id).all() :
                     if j.Type < 4 :
                         if j.Type == 1 :
