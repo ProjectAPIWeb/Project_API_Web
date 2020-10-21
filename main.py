@@ -279,7 +279,7 @@ def menu() :
 def detail(ID) :
 # ดึงค่า detail order จาก table เพื่อนำมาแสดง
     Order_User = db.session.query(Order).filter_by(id=ID).first()
-    Pre_Order = db.session.query(PreOrder).filter_by(time=Order_User.time).all()
+    Pre_Order = db.session.query(PreOrder).filter_by(id_user=Order_User.id_user,time=Order_User.time).all()
     product = []
     for i in Pre_Order :
         value = {'name' : i.product, 'qty' : i.qty, 'price' : i.price}
