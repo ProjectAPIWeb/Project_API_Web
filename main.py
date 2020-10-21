@@ -130,11 +130,21 @@ def admin() :
     if session['logged_in'] == True : # ตรวจสอบว่า login หรือยัง
         if session['name'] == 'Admin' :   # เช็คคนที่เข้าใช้ page staff
             AO = db.session.query(Order).all()
-            L = []
-            for i in AO :
-                if i.Type < 4 :
-                    V = {"ID" : i.id, "Type" : i.Type}
-                    L.append(V)
+            P = db.session.query(PreOrder).all()
+            U = db.session.query(User).all()
+            Username = []
+            for i in U :
+                Value = {"ID" : i.id, 'name' : i.name}
+                for j in db.session.query(Order).filter_by(id_user=i.id).all() :
+                    if i.Type < 4 :
+                        if i.Type == 1 :
+                            Type = "In Queue"
+                        elif i.Type == 2 :
+                            Type = "On Cooking"
+                        elif i.Type == 3 :
+                            Type = "On Delivery"
+                        Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : Type}
+                        Username.append(Value)
             if request.method == 'POST' : # ตรวจสอบค่าที่ได้รับมา
                 if request.form.get("Type") : 
                     O = db.session.query(Order).filter_by(id=request.form.get('ID')).first()
@@ -144,9 +154,9 @@ def admin() :
                         return redirect(url_for('admin')) # เรียกฟังชัน admin
                     else :
                         msg = "Error Input"
-                        return render_template('admin.html', L=L, msg=msg) # Run html file
+                        return render_template('admin.html', L=Value, msg=msg) # Run html file
             msg = ''
-            return render_template('admin.html', L=L) # Run html file
+            return render_template('admin.html', L=Value) # Run html file
 
         else :
             text = "Staff Only"
