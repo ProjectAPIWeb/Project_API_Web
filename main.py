@@ -129,8 +129,6 @@ def register() :
 def admin() :
     if session['logged_in'] == True : # ตรวจสอบว่า login หรือยัง
         if session['name'] == 'Admin' :   # เช็คคนที่เข้าใช้ page staff
-            AO = db.session.query(Order).all()
-            P = db.session.query(PreOrder).all()
             U = db.session.query(User).all()
             Username = []
             for i in U :
@@ -156,6 +154,8 @@ def admin() :
                         return render_template('admin.html', L=Value, msg=msg) # Run html file
                 if request.form.get("Search") :
                     return detail(request.form.get("Search")) 
+            if Value == [] :
+                return render_template('admin.html', L=Value, msg="No Order Now") # Run html file
             msg = ''
             return render_template('admin.html', L=Value) # Run html file
 
