@@ -155,6 +155,8 @@ def admin() :
                     else :
                         msg = "Error Input"
                         return render_template('admin.html', L=Value, msg=msg) # Run html file
+                if request.form.get("Search") :
+                    return detail(request.form.get("Search")) 
             msg = ''
             return render_template('admin.html', L=Value) # Run html file
 
