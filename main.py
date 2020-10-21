@@ -136,11 +136,13 @@ def admin() :
                     if j.Type < 4 :
                         if j.Type == 1 :
                             Type = "In Queue"
+                            Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : Type}
                         elif j.Type == 2 :
                             Type = "On Cooking"
+                            Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : Type}
                         elif j.Type == 3 :
                             Type = "On Delivery"
-                        Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : Type}
+                            Value = {'Name' : i.name, "ID Order" : j.id, "Date": j.date, "Type" : Type}
                     Username.append(Value)
             if request.method == 'POST' : # ตรวจสอบค่าที่ได้รับมา
                 if request.form.get("Type") : 
