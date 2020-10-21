@@ -378,7 +378,7 @@ def profile() :
         Time = db.session.query(Order).filter_by(id=ID).first()
         if request.method == "POST" :   # ตรวจสอบค่าที่ได้รับมา
             if 'Order_id' in request.form :
-                if Time.time != 4 : # Cancel Order
+                if Time.time == 1 : # Cancel Order
                     db.session.query(PreOrder).filter_by(id_user=session['id'], time=Time.time).delete()
                     db.session.query(Order).filter_by(id=ID).delete()
                     db.session.commit() 
@@ -522,6 +522,5 @@ def logout():
 
 # set ค่า run        
 if __name__ == '__main__' :
-    app.run(debug=True)
-    app.run(host='0.0.0.0', port=80)
+    app.run(debug=True, host='0.0.0.0', port=80)
 
